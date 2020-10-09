@@ -13,7 +13,6 @@ const routes = [
   },
   {
     path: '/admin',
-    // name: 'Admin',
     component: () => import('../views/Admin.vue'),
     meta: { requiresAuth: true },
     children: [
@@ -49,8 +48,9 @@ router.beforeEach((to, from, next) => {
         path: '/',
         query: { redirect: to.fullPath },
       });
+    } else {
+      next();
     }
-    next();
   } else {
     next();
   }

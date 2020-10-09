@@ -43,7 +43,7 @@ export default {
       fb.auth()
         .signOut()
         .then(() => {
-          this.$router.replace({ name: 'Home' });
+          this.$router.replace('Home');
         })
         .catch((err) => {
           console.log(err);

@@ -59,6 +59,11 @@ export default {
         });
     },
   },
+  mounted() {
+    this.$root.$on('bv::modal::hidden', () => {
+      this.resetForm();
+    });
+  },
 };
 </script>
 
