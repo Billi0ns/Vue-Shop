@@ -32,12 +32,13 @@
       ></b-form-textarea>
     </b-form-group>
 
-    <b-form-group label="圖片網址" label-for="inputImage">
-      <b-form-input
-        id="inputImage"
-        v-model="form.imageUrl"
-        required
-      ></b-form-input>
+    <b-form-group label="上傳圖片" label-for="inputImage">
+      <b-form-file
+        placeholder="選擇檔案或將檔案拖曳至此"
+        drop-placeholder="Drop file here..."
+        accept="image/jpeg, image/png, image/gif"
+        @change="uploadImage"
+      ></b-form-file>
     </b-form-group>
 
     <b-form-group>
@@ -64,7 +65,8 @@
 </template>
 
 <script>
-import { db } from '../firebase';
+import { v4 as uuidv4 } from 'uuid';
+import { fb, db } from '../firebase';
 
 export default {
   data() {
@@ -74,7 +76,7 @@ export default {
         category: null,
         price: null,
         description: null,
-        imageUrl: null,
+        imageFile: null,
         isEnabled: false,
       },
     };
@@ -112,6 +114,30 @@ export default {
         .catch((error) => {
           console.error('Error updating document: ', error);
         });
+    },
+    uploadImage(e) {
+      const file = e.target.files[0];
+      const uuid = uuidv4();
+
+      const storageRef = fb.storage().ref(`products/${uuid}`);
+      const uploadTask = storageRef.put(file);
+
+      uploadTask.on(
+        'state_changed',
+        () => {
+          // Observe state change events such as progress, pause, and resume
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            this.form.imageFile = downloadURL;
+            console.log('File available at', downloadURL);
+          });
+          // eslint-disable-next-line comma-dangle
+        }
+      );
     },
     submitForm() {
       if (this.submitMode === 'addData') {

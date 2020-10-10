@@ -29,18 +29,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item.id">
-          <td>{{ item.category }}</td>
-          <td>{{ item.title }}</td>
-          <td>{{ item.price }}</td>
-          <td>{{ item.isEnabled }}</td>
-          <td>{{ getReadableDate(item.createdAt) }}</td>
+        <tr v-for="product in products" :key="product.id">
+          <td>{{ product.category }}</td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.isEnabled }}</td>
+          <td>{{ getReadableDate(product.createdAt) }}</td>
           <td>
             <b-button
               variant="primary"
               class="mr-3"
               v-b-modal="'edit-modal'"
-              @click="activeProduct = item"
+              @click="activeProduct = product"
             >
               編輯
             </b-button>
@@ -48,7 +48,7 @@
             <b-button
               variant="danger"
               v-b-modal="'delete-modal'"
-              @click="activeProduct = item"
+              @click="activeProduct = product"
             >
               刪除
             </b-button>
@@ -98,7 +98,7 @@ import { db } from '../firebase';
 export default {
   data() {
     return {
-      items: [],
+      products: [],
       activeProduct: {},
     };
   },
@@ -132,11 +132,11 @@ export default {
   },
   created() {
     db.collection('products').onSnapshot((snapshot) => {
-      this.items = snapshot.docs.map((doc) => ({
+      this.products = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      console.log("All data in 'products' collection", this.items);
+      console.log("All data in 'products' collection", this.products);
     });
   },
 };
