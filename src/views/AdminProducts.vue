@@ -10,6 +10,7 @@
       hide-footer
       header-bg-variant="dark"
       headerTextVariant="light"
+      size="lg"
     >
       <app-product-form
         submitMode="addData"
@@ -63,6 +64,7 @@
       hide-footer
       header-bg-variant="dark"
       headerTextVariant="light"
+      size="lg"
     >
       <app-product-form
         submitMode="editData"
@@ -79,11 +81,7 @@
         <b-button size="sm" variant="outline-secondary" @click="cancel()">
           取消
         </b-button>
-        <b-button
-          size="sm"
-          variant="danger"
-          @click="deleteProduct(activeProduct.id)"
-        >
+        <b-button size="sm" variant="danger" @click="deleteProduct()">
           確認
         </b-button>
       </template>
@@ -93,7 +91,7 @@
 
 <script>
 import AppProductForm from '@/components/AppProductForm.vue';
-import { db } from '../firebase';
+import { fb, db } from '../firebase';
 
 export default {
   data() {
@@ -109,11 +107,29 @@ export default {
     getReadableDate(timestamp) {
       return new Date(timestamp.seconds * 1000).toLocaleDateString('zh-tw');
     },
-    deleteProduct(id) {
+    deleteImage(imageUrl) {
+      const imageRef = fb.storage().refFromURL(imageUrl);
+
+      imageRef
+        .delete()
+        .then(() => {
+          console.log('Image deleted!');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    deleteProduct() {
+      const { id } = this.activeProduct;
+      const imageUrl = this.activeProduct.imageFile;
+
       db.collection('products')
         .doc(id)
         .delete()
         .then(() => {
+          if (imageUrl) {
+            this.deleteImage(imageUrl);
+          }
           console.log('Document successfully deleted!');
           this.$bvModal.hide('delete-modal');
           this.makeToast('刪除');
@@ -131,13 +147,15 @@ export default {
     },
   },
   created() {
-    db.collection('products').onSnapshot((snapshot) => {
-      this.products = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      console.log("All data in 'products' collection", this.products);
-    });
+    db.collection('products')
+      .orderBy('createdAt', 'desc')
+      .onSnapshot((snapshot) => {
+        this.products = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        console.log("All data in 'products' collection", this.products);
+      });
   },
 };
 </script>
