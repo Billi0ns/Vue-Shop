@@ -56,7 +56,7 @@
       type="submit"
       variant="dark"
       class="btn-block"
-      @click.prevent="submitForm()"
+      @click.prevent="submitForm"
     >
       確認
     </b-button>
@@ -86,7 +86,11 @@ export default {
   methods: {
     addProduct() {
       db.collection('products')
-        .add(this.form)
+        // .add(this.form)
+        .add({
+          createdAt: new Date(Date.now()),
+          ...this.form,
+        })
         .then((docRef) => {
           console.log('Document written with ID: ', docRef.id);
           this.$bvModal.hide('add-modal');
@@ -109,9 +113,6 @@ export default {
           console.error('Error updating document: ', error);
         });
     },
-    resetForm() {
-      Object.assign(this.$data, this.$options.data.apply(this));
-    },
     submitForm() {
       if (this.submitMode === 'addData') {
         this.addProduct();
@@ -127,11 +128,6 @@ export default {
       this.form = { ...this.activeProduct };
       delete this.form.id;
     }
-  },
-  mounted() {
-    this.$root.$on('bv::modal::hidden', () => {
-      this.resetForm();
-    });
   },
 };
 </script>

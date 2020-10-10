@@ -24,6 +24,7 @@
           <th scope="col">產品名稱</th>
           <th scope="col">售價</th>
           <th scope="col">狀態</th>
+          <th scope="col">建立日期</th>
           <th scope="col">編輯</th>
         </tr>
       </thead>
@@ -33,6 +34,7 @@
           <td>{{ item.title }}</td>
           <td>{{ item.price }}</td>
           <td>{{ item.isEnabled }}</td>
+          <td>{{ getReadableDate(item.createdAt) }}</td>
           <td>
             <b-button
               variant="primary"
@@ -104,6 +106,9 @@ export default {
     AppProductForm,
   },
   methods: {
+    getReadableDate(timestamp) {
+      return new Date(timestamp.seconds * 1000).toLocaleDateString('zh-tw');
+    },
     deleteProduct(id) {
       db.collection('products')
         .doc(id)
