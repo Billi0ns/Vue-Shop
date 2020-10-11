@@ -36,12 +36,17 @@
           </b-col>
 
           <b-col>
-            <b-form-group label="售價" label-for="inputPrice">
-              <b-form-input id="inputPrice" v-model="form.price" required>
+            <b-form-group label="單位" label-for="inputUnit">
+              <b-form-input id="inputUnit" v-model="form.unit" required>
               </b-form-input>
             </b-form-group>
           </b-col>
         </b-form-row>
+
+        <b-form-group label="售價" label-for="inputPrice">
+          <b-form-input id="inputPrice" v-model="form.price" required>
+          </b-form-input>
+        </b-form-group>
 
         <hr />
 
@@ -89,6 +94,7 @@ export default {
       form: {
         title: null,
         category: null,
+        unit: null,
         price: null,
         description: null,
         imageFile: null,

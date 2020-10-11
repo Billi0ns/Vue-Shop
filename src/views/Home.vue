@@ -1,18 +1,19 @@
 <template>
   <div class="home">
-    <router-link to="/admin">Admin</router-link>
-    <app-login></app-login>
+    <app-header></app-header>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import AppLogin from '@/components/AppLogin.vue';
+import AppHeader from '@/components/AppHeader.vue';
+// import AppLogin from '@/components/AppLogin.vue';
 
 export default {
   name: 'Home',
   components: {
-    AppLogin,
+    AppHeader,
+    // AppLogin,
   },
 };
 </script>

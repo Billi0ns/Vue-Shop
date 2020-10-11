@@ -75,7 +75,7 @@
 
     <b-modal id="delete-modal" title="刪除商品">
       <p>
-        {{ `是否刪除 ${activeProduct.title}  商品(刪除後將無法恢復)。` }}
+        {{ `是否刪除 【${activeProduct.title}】  商品(刪除後將無法恢復)。` }}
       </p>
       <template v-slot:modal-footer="{ cancel }">
         <b-button size="sm" variant="outline-secondary" @click="cancel()">

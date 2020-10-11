@@ -1,34 +1,26 @@
 <template>
-  <div>
-    <b-button v-b-modal.login-modal>管理者登入</b-button>
+  <b-modal id="login-modal" centered title="管理者登入" ref="login-modal">
+    <b-input-group class="mt-3">
+      <b-form-input placeholder="Email Address" v-model="email"></b-form-input>
+    </b-input-group>
+    <b-input-group class="mt-3">
+      <b-form-input
+        placeholder="password"
+        type="password"
+        v-model="password"
+        @keyup.enter="login"
+      ></b-form-input>
+    </b-input-group>
 
-    <b-modal id="login-modal" centered title="管理者登入" ref="login-modal">
-      <b-input-group class="mt-3">
-        <b-form-input
-          placeholder="Email Address"
-          v-model="email"
-        ></b-form-input>
-      </b-input-group>
-      <b-input-group class="mt-3">
-        <b-form-input
-          placeholder="password"
-          type="password"
-          v-model="password"
-          @keyup.enter="login"
-        ></b-form-input>
-      </b-input-group>
-
-      <template v-slot:modal-footer="{}">
-        <b-button size="md" variant="primary" @click="login" class="btn-block">
-          Sign In
-        </b-button>
-      </template>
-    </b-modal>
-  </div>
+    <template v-slot:modal-footer="{}">
+      <b-button size="md" variant="primary" @click="login" class="btn-block">
+        Sign In
+      </b-button>
+    </template>
+  </b-modal>
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
 import { fb } from '../firebase';
 
 export default {
@@ -58,11 +50,6 @@ export default {
           console.log(error);
         });
     },
-  },
-  mounted() {
-    this.$root.$on('bv::modal::hidden', () => {
-      this.resetForm();
-    });
   },
 };
 </script>
