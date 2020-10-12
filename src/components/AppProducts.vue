@@ -1,21 +1,10 @@
 <template>
   <div class="container">
-    <!-- <b-dropdown :text="selectedCategory" variant="outline-info" class="m-2">
-      <b-dropdown-item href="#" @click="getAllProducts">
-        所有商品
-      </b-dropdown-item>
-      <b-dropdown-item href="#" @click="getCategory('蛋糕')">
-        蛋糕
-      </b-dropdown-item>
-      <b-dropdown-item href="#" @click="getCategory('aaa')">
-        aaa
-      </b-dropdown-item>
-    </b-dropdown> -->
-
     <div class="d-flex justify-content-end mr-3">
       <div class="dropdown">
         <div
           class="dropdown-title"
+          @click="dropdownShow = !dropdownShow"
           @mouseover="dropdownShow = true"
           @mouseleave="dropdownShow = false"
         >
@@ -34,39 +23,23 @@
         </ul>
       </div>
     </div>
-    <!-- <div class="dropdown">
-      <div
-        class="dropdown-title"
-        @mouseover="dropdownShow = true"
-        @mouseleave="dropdownShow = false"
-      >
-        {{ selectedCategory }}
-      </div>
 
-      <ul
-        class="dropdown-content"
-        :class="{ show: dropdownShow }"
-        @mouseover="dropdownShow = true"
-        @mouseleave="dropdownShow = false"
-      >
-        <li @click="getAllProducts">所有商品</li>
-        <li @click="getCategory('蛋糕')">蛋糕</li>
-        <li @click="getCategory('aaa')">aaa</li>
-      </ul>
-    </div> -->
     <div class="row">
       <app-product
         v-for="product in products"
         :key="product.key"
         :product="product"
-        class="col-sm-6 col-lg-4"
+        class="col-sm-6 col-md-4 col-lg-3"
       ></app-product>
     </div>
+
+    <app-cart-modal></app-cart-modal>
   </div>
 </template>
 
 <script>
 import AppProduct from './AppProduct.vue';
+import AppCartModal from './AppCartModal.vue';
 import { db } from '../firebase';
 
 export default {
@@ -126,6 +99,7 @@ export default {
   },
   components: {
     AppProduct,
+    AppCartModal,
   },
 };
 </script>
