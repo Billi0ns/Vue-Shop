@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="md" type="dark" variant="primary">
+    <b-navbar toggleable="md" type="light" variant="light">
       <b-navbar-brand href="#">商標</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
