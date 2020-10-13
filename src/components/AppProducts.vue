@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="{overflow: hidden}">
     <div class="d-flex justify-content-end mr-3">
       <div class="dropdown">
         <div
@@ -29,7 +29,7 @@
         v-for="product in products"
         :key="product.key"
         :product="product"
-        class="col-sm-6 col-md-4 col-lg-3"
+        class="col-6 col-md-4 col-lg-3"
       ></app-product>
     </div>
 

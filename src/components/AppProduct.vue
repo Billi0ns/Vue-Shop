@@ -1,20 +1,21 @@
 <template>
-  <div class="product-card container pb-4">
-    <!--  <img :src="product.imageFile" alt="" class="product-card__img pb-3" /> -->
-    <div
-      :style="{ backgroundImage: getImageUrl(product.imageFile) }"
-      class="imageContainer"
-    >
-      <button class="desktop-btn" @click="launchModal">
-        加入購物車
-      </button>
-    </div>
+  <div class="mb-4">
+    <div class="product-card">
+      <div
+        :style="{ backgroundImage: getImageUrl(product.imageFile) }"
+        class="imageContainer"
+      >
+        <button class="desktop-btn" @click="launchModal">
+          加入購物車
+        </button>
+      </div>
 
-    <div>{{ product.title }}</div>
-    <div class="pb-3 font-weight-bold">NT${{ product.price }}</div>
-    <b-button class="w-100 mobile-btn" size="sm" variant="light">
-      加入購物車
-    </b-button>
+      <div>{{ product.title }}</div>
+      <div class="pb-3 font-weight-bold">NT${{ product.price }}</div>
+      <b-button class="w-100 mobile-btn" size="sm" variant="light">
+        加入購物車
+      </b-button>
+    </div>
   </div>
 </template>
 
@@ -28,7 +29,7 @@ export default {
       return `url(${image})`;
     },
     launchModal() {
-      this.$bvModal.show('cart-modal');
+      this.$store.commit('toggleCartModal', true);
       this.$store.commit('setCurrentProduct', this.product);
     },
   },
@@ -36,16 +37,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/* .product-card__img {
-  width: 100%;
-  height: auto;
-} */
+.product-card {
+  border: 1px solid #eee;
+}
 
 .imageContainer {
   width: 100%;
   padding: 50%;
   margin-bottom: 10px;
-  min-height: 200px;
   background-position: center center;
   background-repeat: no-repeat;
   overflow: hidden;
