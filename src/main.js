@@ -20,6 +20,9 @@ fb.auth().onAuthStateChanged(() => {
       router,
       store,
       render: (h) => h(App),
+      beforeCreate() {
+        this.$store.commit('initializeCart');
+      },
     }).$mount('#app');
   }
 });

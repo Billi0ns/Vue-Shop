@@ -1,17 +1,4 @@
 <template>
-  <!--   <div>
-    <b-button @click="$bvModal.show('cart-modal')"
-      >Launch centered modal</b-button
-    >
-
-    <b-modal id="cart-modal" centered title="BootstrapVue">
-      <p class="my-4">Vertically centered modal!</p>
-      <p>{{ product.title }}</p>
-      <p>{{ product.price }}</p>
-      <div class="modal-footer d-none"></div>
-    </b-modal>
-  </div> -->
-
   <transition name="fade">
     <div class="cart-modal" v-if="showModal">
       <div class="cart-modal__content">
@@ -35,8 +22,12 @@
               v-model="amount"
               min="1"
               max="10"
-              class="mb-5"
+              class="mb-3"
             ></b-form-spinbutton>
+
+            <p class="text-right font-weight-bold mb-2">
+              小計：NT${{ product.price * amount }}
+            </p>
 
             <button class="cart-btn" @click="addToCartHandler">
               加入購物車
@@ -71,6 +62,16 @@ export default {
     },
     addToCartHandler() {
       console.log(`購買${this.product.title} ${this.amount} 份`);
+      this.$store.commit('addToCart', {
+        amount: this.amount,
+        id: this.product.id,
+        title: this.product.title,
+        price: this.product.price,
+        imageFile: this.product.imageFile,
+      });
+
+      const vuexCart = this.$store.state.cartItems;
+      localStorage.setItem('cartItems', JSON.stringify(vuexCart));
       this.hideCartModal();
     },
   },
@@ -119,7 +120,6 @@ export default {
 .cart-btn {
   width: 100%;
   padding: 5px 0;
-  margin-bottom: 10px;
   border: none;
   border-radius: 3px;
   color: white;
