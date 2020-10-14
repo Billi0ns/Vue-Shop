@@ -14,7 +14,7 @@
     >
       <app-product-form
         submitMode="addData"
-        @makeToast="makeToast('新增')"
+        @makeToast="$_makeToast('已成功新增產品!')"
       ></app-product-form>
     </b-modal>
 
@@ -69,7 +69,7 @@
       <app-product-form
         submitMode="editData"
         :activeProduct="activeProduct"
-        @makeToast="makeToast('編輯')"
+        @makeToast="$_makeToast('已成功編輯產品!')"
       ></app-product-form>
     </b-modal>
 
@@ -132,18 +132,11 @@ export default {
           }
           console.log('Document successfully deleted!');
           this.$bvModal.hide('delete-modal');
-          this.makeToast('刪除');
+          this.$_makeToast('已成功刪除產品!');
         })
         .catch((error) => {
           console.error('Error removing document: ', error);
         });
-    },
-    makeToast(toastAction) {
-      this.$bvToast.toast(`已成功${toastAction}產品!`, {
-        autoHideDelay: 3000,
-        variant: 'success',
-        solid: true,
-      });
     },
   },
   created() {

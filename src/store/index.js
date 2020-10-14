@@ -33,6 +33,24 @@ export default new Vuex.Store({
       } else {
         state.cartItems.push(payload);
       }
+
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
+    },
+    deleteCartItem(state, payload) {
+      const found = state.cartItems.find((item) => item.id === payload);
+      const index = state.cartItems.indexOf(found);
+
+      if (found) {
+        state.cartItems.splice(index, 1);
+      }
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
+    },
+    updateCart(state, payload) {
+      const found = state.cartItems.find((item) => item.id === payload.id);
+      found.amount = payload.amount;
+      console.log('amount updated');
+
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
     },
   },
   actions: {},

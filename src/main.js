@@ -26,3 +26,16 @@ fb.auth().onAuthStateChanged(() => {
     }).$mount('#app');
   }
 });
+
+Vue.mixin({
+  methods: {
+    $_makeToast(msg) {
+      this.$bvToast.toast(msg, {
+        autoHideDelay: 1000,
+        variant: 'success',
+        solid: true,
+        noCloseButton: true,
+      });
+    },
+  },
+});

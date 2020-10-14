@@ -12,6 +12,16 @@ const routes = [
     component: Home,
   },
   {
+    path: '/products',
+    name: 'Products',
+    component: () => import('../views/Products.vue'),
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: () => import('../views/Cart.vue'),
+  },
+  {
     path: '/admin',
     component: () => import('../views/Admin.vue'),
     meta: { requiresAuth: true },

@@ -3,21 +3,19 @@
     <app-header></app-header>
 
     <img src="../assets/hero-image.jpg" class="hero-image mb-3" alt="" />
-
-    <app-products></app-products>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import AppHeader from '@/components/AppHeader.vue';
-import AppProducts from '@/components/AppProducts.vue';
+// import AppProducts from '@/components/AppProducts.vue';
 
 export default {
   name: 'Home',
   components: {
     AppHeader,
-    AppProducts,
+    // AppProducts,
   },
 };
 </script>

@@ -70,8 +70,9 @@ export default {
         imageFile: this.product.imageFile,
       });
 
-      const vuexCart = this.$store.state.cartItems;
-      localStorage.setItem('cartItems', JSON.stringify(vuexCart));
+      //  const vuexCart = this.$store.state.cartItems;
+      // localStorage.setItem('cartItems', JSON.stringify(vuexCart));
+      this.$_makeToast('成功加入購物車!');
       this.hideCartModal();
     },
   },
