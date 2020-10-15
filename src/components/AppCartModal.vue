@@ -10,9 +10,11 @@
             </div>
           </div>
 
-          <div class="col-xs-12 col-md-6 text-left mt-3 mt-md-0">
+          <div class="col-xs-12 col-md-6 text-left mt-2 mt-md-0">
             <h5 class="mt-1  mb-3 product-title">{{ product.title }}</h5>
-            <p class="font-weight-bold product-price">NT${{ product.price }}</p>
+            <p class="font-weight-bold product-price">
+              {{ product.price | formatNumber }}
+            </p>
 
             <p class="cart-info">
               ① 蛋糕皆為接單安排製作，故訂單確認後無法更換口味
@@ -22,17 +24,34 @@
             <label for="demo-sb" class="amount-text mb-0">
               數量
             </label>
-            <b-form-spinbutton
-              id="demo-sb"
-              v-model="amount"
-              min="1"
-              max="30"
-              class="mb-3"
-            ></b-form-spinbutton>
 
-            <p class="text-right font-weight-bold mb-2">
-              小計：{{ (product.price * amount) | formatNumber }}
-            </p>
+            <div class="justify-content-center mobile-bottom">
+              <b-form-spinbutton
+                id="demo-sb"
+                v-model="amount"
+                min="1"
+                max="30"
+                class="mb-3"
+              ></b-form-spinbutton>
+
+              <p class="product-subtotal">
+                小計：{{ (product.price * amount) | formatNumber }}
+              </p>
+            </div>
+
+            <div class="desktop-bottom">
+              <b-form-spinbutton
+                id="demo-sb"
+                v-model="amount"
+                min="1"
+                max="30"
+                class="mb-3"
+              ></b-form-spinbutton>
+
+              <p class="text-right font-weight-bold mb-2">
+                小計：{{ (product.price * amount) | formatNumber }}
+              </p>
+            </div>
 
             <button class="cart-btn" @click="addToCartHandler">
               加入購物車
@@ -79,6 +98,7 @@ export default {
       this.hideCartModal();
     },
     handleUrl() {
+      this.hideCartModal();
       this.$router.push({ path: `products/${this.product.id}` });
     },
   },
@@ -161,6 +181,18 @@ export default {
   cursor: pointer;
 }
 
+.product-subtotal {
+  line-height: 38px;
+  text-align: right;
+  font-weight: bold;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.mobile-bottom {
+  display: none;
+}
+
 // Transition
 .fade-enter-active,
 .fade-leave-active {
@@ -185,11 +217,19 @@ export default {
 
   .product-title,
   .product-price {
-    margin-bottom: 10px !important;
+    margin-bottom: 5px !important;
   }
 
   .cart-info {
     margin-bottom: 5px;
+  }
+
+  .mobile-bottom {
+    display: flex;
+  }
+
+  .desktop-bottom {
+    display: none;
   }
 }
 
