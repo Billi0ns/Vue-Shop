@@ -9,13 +9,11 @@
 <script>
 // @ is an alias to /src
 import AppHeader from '@/components/AppHeader.vue';
-// import AppProducts from '@/components/AppProducts.vue';
 
 export default {
   name: 'Home',
   components: {
     AppHeader,
-    // AppProducts,
   },
 };
 </script>

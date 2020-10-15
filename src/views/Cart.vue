@@ -10,7 +10,7 @@ import AppHeader from '@/components/AppHeader.vue';
 import AppCartItems from '@/components/AppCartItems.vue';
 
 export default {
-  name: 'Products',
+  name: 'Cart',
   components: {
     AppHeader,
     AppCartItems,

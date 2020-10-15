@@ -3,16 +3,27 @@
     <div class="product-card">
       <div
         :style="{ backgroundImage: getImageUrl(product.imageFile) }"
-        class="imageContainer"
+        class="imageContainer cursorPointer"
+        @click="handleUrl"
       >
-        <button class="desktop-btn" @click="launchModal">
+        <button class="desktop-btn" @click.stop="launchModal">
           加入購物車
         </button>
       </div>
 
-      <div>{{ product.title }}</div>
-      <div class="pb-3 font-weight-bold">NT${{ product.price }}</div>
-      <b-button class="w-100 mobile-btn" size="sm" variant="light">
+      <span class="cursorPointer" @click="handleUrl">{{ product.title }}</span>
+      <div class="pb-3 font-weight-bold ">
+        <span class="cursorPointer" @click="handleUrl">
+          {{ product.price | formatNumber }}
+        </span>
+      </div>
+
+      <b-button
+        class="w-100 mobile-btn"
+        size="sm"
+        variant="light"
+        @click.stop="launchModal"
+      >
         加入購物車
       </b-button>
     </div>
@@ -32,6 +43,9 @@ export default {
       this.$store.commit('toggleCartModal', true);
       this.$store.commit('setCurrentProduct', this.product);
     },
+    handleUrl() {
+      this.$router.push({ path: `products/${this.product.id}` });
+    },
   },
 };
 </script>
@@ -50,6 +64,10 @@ export default {
   overflow: hidden;
   background-size: contain;
   position: relative;
+}
+
+.cursorPointer {
+  cursor: pointer;
 }
 
 .desktop-btn {

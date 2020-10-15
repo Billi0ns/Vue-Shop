@@ -33,7 +33,7 @@
         <tr v-for="product in products" :key="product.id">
           <td>{{ product.category }}</td>
           <td>{{ product.title }}</td>
-          <td>{{ product.price }}</td>
+          <td>{{ product.price | formatNumber }}</td>
           <td>{{ product.isEnabled }}</td>
           <td>{{ getReadableDate(product.createdAt) }}</td>
           <td>

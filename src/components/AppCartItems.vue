@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-3">
+  <div class="container">
     <div class="cart-items">
       <h1 class="cart-items-title">購物車（{{ cartItems.length }}件）</h1>
 
@@ -13,17 +13,17 @@
               @click="deleteItemHandler(item.id)"
             ></div>
           </div>
-          <div class="item-price">單價：NT${{ item.price }}</div>
+          <div class="item-price">單價：{{ item.price | formatNumber }}</div>
           <div class="item-bottom">
             <b-form-spinbutton
               v-model="item.amount"
               min="1"
-              max="10"
+              max="30"
               style="width: 9rem"
-              @change="updateCart"
+              @change="updateCart({ id: item.id, amount: item.amount })"
             ></b-form-spinbutton>
             <div class="item-price">
-              合計：NT${{ item.price * item.amount }}
+              合計：{{ (item.price * item.amount) | formatNumber }}
             </div>
           </div>
         </div>
@@ -32,7 +32,9 @@
       <table class="table mt-3 desktop-view">
         <thead>
           <tr>
-            <th scope="col" class="text-left pl-3">商品資料</th>
+            <th scope="col" class="text-left title-header">
+              商品資料
+            </th>
             <th scope="col">單件價格</th>
             <th scope="col">數量</th>
             <th scope="col">小計</th>
@@ -47,17 +49,17 @@
                 <div class="item-info__title">{{ item.title }}</div>
               </div>
             </td>
-            <td>NT${{ item.price }}</td>
+            <td>{{ item.price | formatNumber }}</td>
             <td>
               <b-form-spinbutton
                 v-model="item.amount"
                 min="1"
-                max="10"
+                max="30"
                 @change="updateCart({ id: item.id, amount: item.amount })"
               ></b-form-spinbutton>
             </td>
 
-            <td>NT${{ item.price * item.amount }}</td>
+            <td>{{ (item.price * item.amount) | formatNumber }}</td>
             <td class="remove-container">
               <div
                 class="item-info__remove"
@@ -155,6 +157,10 @@ export default {
 
 .desktop-view {
   display: none;
+}
+
+.title-header {
+  padding-left: 6rem;
 }
 
 @media (min-width: 768px) {

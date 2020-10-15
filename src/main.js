@@ -39,3 +39,10 @@ Vue.mixin({
     },
   },
 });
+
+// Move this before new Vue created if any problem occur
+Vue.filter('formatNumber', (value) => {
+  const formattedNum = Number(value).toLocaleString('en-US');
+  const currency = `NT$${formattedNum}`;
+  return currency;
+});

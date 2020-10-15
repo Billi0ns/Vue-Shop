@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-3">
     <b-navbar toggleable="md" type="light" variant="light">
       <b-navbar-brand href="#">商標</b-navbar-brand>
 
@@ -7,23 +7,23 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#">
+          <b-nav-item>
             <router-link to="/" tag="li">首頁</router-link>
           </b-nav-item>
-          <b-nav-item href="#">
+          <b-nav-item>
             <router-link to="/products" tag="li">商品列表</router-link>
           </b-nav-item>
-          <b-nav-item href="#">
+          <b-nav-item>
             <router-link to="/aboutUs" tag="li">關於我們</router-link>
           </b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item href="#">
+          <b-nav-item>
             <router-link to="/cart" tag="li">購物車</router-link>
           </b-nav-item>
-          <b-nav-item href="#" @click="handleLogin">
+          <b-nav-item @click="handleLogin">
             後台管理
           </b-nav-item>
         </b-navbar-nav>
@@ -47,7 +47,7 @@ export default {
   methods: {
     handleLogin() {
       if (this.adminSignedIn) {
-        this.$router.push('admin');
+        this.$router.push('/admin');
       } else {
         this.$bvModal.show('login-modal');
       }

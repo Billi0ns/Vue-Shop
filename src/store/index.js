@@ -47,9 +47,8 @@ export default new Vuex.Store({
     },
     updateCart(state, payload) {
       const found = state.cartItems.find((item) => item.id === payload.id);
-      found.amount = payload.amount;
-      console.log('amount updated');
 
+      found.amount = payload.amount;
       localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
     },
   },
