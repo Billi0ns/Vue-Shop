@@ -85,7 +85,6 @@ export default {
         imageFile: this.product.imageFile,
       });
 
-      // this.$_makeToast('成功加入購物車!');
       this.$store.commit('toggleCartListSlider', true);
     },
   },

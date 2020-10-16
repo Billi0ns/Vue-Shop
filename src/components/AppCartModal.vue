@@ -61,14 +61,10 @@
       </div>
       <div class="cart-modal__backdrop" @click="hideCartModal"></div>
     </div>
-
-    <app-cart-list-slider v-if="showCartList"></app-cart-list-slider>
   </transition>
 </template>
 
 <script>
-import AppCartListSlider from '@/components/AppCartListSlider.vue';
-
 export default {
   data() {
     return {
@@ -81,9 +77,6 @@ export default {
     },
     showModal() {
       return this.$store.state.showCartModal;
-    },
-    showCartList() {
-      return this.$store.state.showCartListSlider;
     },
   },
   methods: {
@@ -101,7 +94,6 @@ export default {
         imageFile: this.product.imageFile,
       });
 
-      // this.$_makeToast('成功加入購物車!');
       this.hideCartModal();
       this.$store.commit('toggleCartListSlider', true);
     },
@@ -109,9 +101,6 @@ export default {
       this.hideCartModal();
       this.$router.push({ path: `products/${this.product.id}` });
     },
-  },
-  components: {
-    AppCartListSlider,
   },
 };
 </script>

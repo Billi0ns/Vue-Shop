@@ -45,8 +45,15 @@
           <tr v-for="item in cartItems" :key="item.id">
             <td>
               <div class="item-info">
-                <img class="item-info__img" :src="item.imageFile" alt="" />
-                <div class="item-info__title">{{ item.title }}</div>
+                <img
+                  class="item-info__img"
+                  :src="item.imageFile"
+                  alt=""
+                  @click="handleUrl(item.id)"
+                />
+                <div class="item-info__title" @click="handleUrl(item.id)">
+                  {{ item.title }}
+                </div>
               </div>
             </td>
             <td>{{ item.price | formatNumber }}</td>
@@ -83,10 +90,12 @@ export default {
   methods: {
     deleteItemHandler(id) {
       this.$store.commit('deleteCartItem', id);
-      this.$_makeToast('已刪除購物車產品');
     },
     updateCart(payload) {
       this.$store.commit('updateCart', payload);
+    },
+    handleUrl(id) {
+      this.$router.push({ path: `products/${id}` });
     },
   },
 };
@@ -120,11 +129,13 @@ export default {
   width: 60px;
   height: 60px;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .item-info__title {
   color: #333;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .item-info__remove {

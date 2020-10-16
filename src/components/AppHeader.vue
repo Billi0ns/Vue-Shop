@@ -31,11 +31,16 @@
     </b-navbar>
 
     <app-login></app-login>
+
+    <transition name="fade">
+      <app-cart-list-slider v-if="showCartList"></app-cart-list-slider>
+    </transition>
   </div>
 </template>
 
 <script>
 import AppLogin from '@/components/AppLogin.vue';
+import AppCartListSlider from '@/components/AppCartListSlider.vue';
 import { fb } from '../firebase';
 
 export default {
@@ -43,6 +48,11 @@ export default {
     return {
       adminSignedIn: fb.auth().currentUser,
     };
+  },
+  computed: {
+    showCartList() {
+      return this.$store.state.showCartListSlider;
+    },
   },
   methods: {
     handleLogin() {
@@ -55,8 +65,19 @@ export default {
   },
   components: {
     AppLogin,
+    AppCartListSlider,
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+// Transition
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

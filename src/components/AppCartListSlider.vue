@@ -1,56 +1,59 @@
 <template>
-  <transition name="fade">
-    <div class="cart-list">
-      <div
-        class="cart-list__content"
-        @mouseover="focusStatus = true"
-        @mouseleave="focusStatus = false"
-        @touchstart="focusStatus = true"
-      >
-        <div class="cart-list__items">
-          <div
-            v-for="item in cartItems"
-            :key="item.id"
-            class="d-flex item-container"
-          >
-            <div>
-              <div
-                :style="{ backgroundImage: getImageUrl(item.imageFile) }"
-                class="item-info__img"
-              ></div>
+  <div class="cart-list">
+    <div
+      class="cart-list__content"
+      @mouseover="focusStatus = true"
+      @mouseleave="focusStatus = false"
+      @touchstart="focusStatus = true"
+    >
+      <div class="cart-list__items">
+        <div
+          v-for="item in cartItems"
+          :key="item.id"
+          class="d-flex item-container"
+        >
+          <div>
+            <div
+              :style="{ backgroundImage: getImageUrl(item.imageFile) }"
+              class="item-info__img"
+              @click="handleUrl(item.id)"
+            ></div>
+          </div>
+
+          <div class="w-100">
+            <div class="item-info__title" @click="handleUrl(item.id)">
+              {{ item.title }}
             </div>
+            <b-form-spinbutton
+              v-model="item.amount"
+              min="1"
+              max="30"
+              size="sm"
+              class="my-2"
+              style="width: 7rem"
+            ></b-form-spinbutton>
 
-            <div class="w-100">
-              <div class="item-info__title">{{ item.title }}</div>
-              <b-form-spinbutton
-                v-model="item.amount"
-                min="1"
-                max="30"
-                size="sm"
-                class="my-2"
-                style="width: 7rem"
-              ></b-form-spinbutton>
-
-              <div class="item-bottom">
-                <div class="prize-details">
-                  單價：{{ item.price | formatNumber }}
-                </div>
-                <div
-                  class="item-info__remove"
-                  @click="deleteItemHandler(item.id)"
-                ></div>
+            <div class="item-bottom">
+              <div class="prize-details">
+                單價：{{ item.price | formatNumber }}
               </div>
+              <div
+                class="item-info__remove"
+                @click="deleteItemHandler(item.id)"
+              ></div>
             </div>
           </div>
         </div>
-
-        <button class="cart-btn">
-          訂單結帳
-        </button>
       </div>
-      <div class="cart-list__backdrop" @click="hideCartList"></div>
+
+      <div @click="hideCartList">
+        <router-link to="/cart" tag="button" class="cart-btn">
+          訂單結帳
+        </router-link>
+      </div>
     </div>
-  </transition>
+    <div class="cart-list__backdrop" @click="hideCartList"></div>
+  </div>
 </template>
 
 <script>
@@ -74,12 +77,20 @@ export default {
     },
     deleteItemHandler(id) {
       this.$store.commit('deleteCartItem', id);
+
+      if (this.cartItems.length === 0) {
+        this.hideCartList();
+      }
     },
     updateCart(payload) {
       this.$store.commit('updateCart', payload);
     },
     getImageUrl(image) {
       return `url(${image})`;
+    },
+    handleUrl(id) {
+      this.hideCartList();
+      this.$router.push({ path: `products/${id}` });
     },
   },
   created() {
@@ -143,6 +154,7 @@ export default {
   background-repeat: no-repeat;
   overflow: hidden;
   background-size: contain;
+  cursor: pointer;
 }
 
 .item-info__title {
@@ -150,6 +162,7 @@ export default {
   font-size: 14px;
   font-weight: 700;
   text-align: left;
+  cursor: pointer;
 }
 
 .item-bottom {
@@ -196,16 +209,6 @@ export default {
   }
 }
 
-// Transition
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
 @media (min-width: 768px) {
   .cart-list__backdrop {
     background-color: transparent;
@@ -217,7 +220,7 @@ export default {
   }
 
   .cart-list__items {
-    height: 500px;
+    max-height: 500px;
   }
 }
 </style>
