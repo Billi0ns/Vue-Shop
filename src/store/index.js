@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     currentProduct: {},
     showCartModal: false,
+    showCartListSlider: false,
     cartItems: [],
   },
   mutations: {
@@ -15,6 +16,9 @@ export default new Vuex.Store({
     },
     toggleCartModal(state, payload) {
       state.showCartModal = payload;
+    },
+    toggleCartListSlider(state, payload) {
+      state.showCartListSlider = payload;
     },
     initializeCart(state) {
       const localCart = localStorage.getItem('cartItems');
