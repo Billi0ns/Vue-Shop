@@ -26,6 +26,11 @@ const routes = [
     component: () => import('../views/Cart.vue'),
   },
   {
+    path: '/payment',
+    name: 'Payment',
+    component: () => import('../views/Payment.vue'),
+  },
+  {
     path: '/admin',
     component: () => import('../views/Admin.vue'),
     meta: { requiresAuth: true },

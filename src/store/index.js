@@ -55,6 +55,10 @@ export default new Vuex.Store({
       found.amount = payload.amount;
       localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
     },
+    resetCart(state) {
+      state.cartItems = [];
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
+    },
   },
   actions: {},
   modules: {},

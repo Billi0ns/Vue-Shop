@@ -6,8 +6,15 @@
       <div class="mobile-view">
         <div v-for="item in cartItems" :key="item.id" class="item-container ">
           <div class="item-info">
-            <img class="item-info__img" :src="item.imageFile" alt="" />
-            <div class="item-info__title">{{ item.title }}</div>
+            <img
+              class="item-info__img"
+              :src="item.imageFile"
+              alt=""
+              @click="handleUrl(item.id)"
+            />
+            <div class="item-info__title" @click="handleUrl(item.id)">
+              {{ item.title }}
+            </div>
             <div
               class="item-info__remove"
               @click="deleteItemHandler(item.id)"
@@ -23,7 +30,7 @@
               @change="updateCart({ id: item.id, amount: item.amount })"
             ></b-form-spinbutton>
             <div class="item-price">
-              合計：{{ (item.price * item.amount) | formatNumber }}
+              小計：{{ (item.price * item.amount) | formatNumber }}
             </div>
           </div>
         </div>
@@ -77,14 +84,140 @@
         </tbody>
       </table>
     </div>
+    <div class="order">
+      <h1 class="order-title">
+        訂單資料
+      </h1>
+
+      <div class="item-container">
+        <div class="d-flex mb-2">
+          <div>小計:</div>
+          <div class="ml-auto">{{ subtotal | formatNumber }}</div>
+        </div>
+        <div class="d-flex mb-2">
+          <div>運費: (滿$1000免運費)</div>
+          <div class="ml-auto">{{ shippingCost | formatNumber }}</div>
+        </div>
+        <hr class="hr-line" />
+        <div class="d-flex font-weight-bold ">
+          <div class="mb-2">合計:（{{ cartItems.length }}件）</div>
+          <div class="ml-auto">{{ total | formatNumber }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="order">
+      <h1 class="order-title">
+        送貨資料
+      </h1>
+
+      <div class="item-container">
+        <b-form @submit="onSubmit" class="text-left order-form">
+          <b-form-group id="input-group-1" label="顧客名稱" label-for="input-1">
+            <b-form-input
+              id="input-1"
+              v-model="form.name"
+              type="text"
+              required
+            ></b-form-input>
+          </b-form-group>
+
+          <b-form-group id="input-group-2" label="電子信箱" label-for="input-2">
+            <b-form-input
+              id="input-2"
+              v-model="form.email"
+              type="email"
+              required
+            ></b-form-input>
+            <b-form-invalid-feedback :state="emailValidation">
+              請輸入有效的電子郵件地址
+            </b-form-invalid-feedback>
+          </b-form-group>
+
+          <b-form-group id="input-group-3" label="電話號碼" label-for="input-3">
+            <b-form-input
+              id="input-3"
+              v-model="form.phone"
+              required
+            ></b-form-input>
+            <b-form-invalid-feedback :state="phoneValidation">
+              請輸入正確手機格式 （10碼）
+            </b-form-invalid-feedback>
+          </b-form-group>
+
+          <b-form-group id="input-group-4" label="地址" label-for="input-4">
+            <b-form-input
+              id="input-4"
+              v-model="form.address"
+              required
+            ></b-form-input>
+          </b-form-group>
+
+          <b-button type="submit" class="order-btn">前往結帳</b-button>
+        </b-form>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { db } from '../firebase';
+
 export default {
+  data() {
+    return {
+      form: {
+        name: null,
+        email: null,
+        phone: null,
+        address: null,
+      },
+    };
+  },
   computed: {
     cartItems() {
       return this.$store.state.cartItems;
+    },
+    subtotal() {
+      let sum = 0;
+
+      // eslint-disable-next-line array-callback-return
+      this.cartItems.map((item) => {
+        sum += item.amount * item.price;
+      });
+      return sum;
+    },
+    shippingCost() {
+      if (this.subtotal >= 1000) {
+        return 0;
+      }
+      return 60;
+    },
+    total() {
+      return this.subtotal + this.shippingCost;
+    },
+    phoneValidation() {
+      const phoneNum = this.form.phone;
+      if (phoneNum === null) {
+        return null;
+      }
+      if (phoneNum.length === 10) {
+        return true;
+      }
+      return false;
+    },
+    emailValidation() {
+      const { email } = this.form;
+      // eslint-disable-next-line no-useless-escape
+      const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      if (email === null) {
+        return null;
+      }
+      if (re.test(email)) {
+        return true;
+      }
+      return false;
     },
   },
   methods: {
@@ -97,15 +230,45 @@ export default {
     handleUrl(id) {
       this.$router.push({ path: `products/${id}` });
     },
+    onSubmit(evt) {
+      evt.preventDefault();
+      this.sendOrder();
+      this.$router.push('/payment');
+    },
+    sendOrder() {
+      db.collection('orders')
+        .add({
+          createdAt: new Date(Date.now()),
+          cartItems: this.cartItems,
+          total: this.total,
+          id: null,
+          isPayed: false,
+        })
+        .then((docRef) => {
+          console.log('Document written with ID: ', docRef.id);
+          db.collection('orders')
+            .doc(docRef.id)
+            .update({
+              id: docRef.id,
+            });
+          this.$store.commit('resetCart');
+        })
+        .catch((error) => {
+          console.error('Error adding document: ', error);
+        });
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.cart-items {
+.cart-items,
+.order {
   border: 1px solid #ededed;
+  margin-bottom: 10px;
 }
-.cart-items-title {
+.cart-items-title,
+.order-title {
   font-size: 18px;
   background: #f6f6f6;
   margin-bottom: 0;
@@ -114,9 +277,12 @@ export default {
 }
 
 .item-container {
-  border-bottom: 1px solid #ededed;
   padding: 10px;
   padding-right: 15px;
+}
+
+.item-container:not(:last-child) {
+  border-bottom: 1px solid #ededed;
 }
 
 .item-info {
@@ -172,6 +338,27 @@ export default {
 
 .title-header {
   padding-left: 6rem;
+}
+
+.hr-line {
+  border-top: 1px solid #eee;
+}
+.order-form {
+  font-size: 14px;
+}
+.order-btn {
+  width: 100%;
+  padding: 5px 0;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  background-color: #5cb85c;
+  border: 1px solid #4cae4c;
+  font-size: 15px;
+
+  &:hover {
+    background-color: #449d44;
+  }
 }
 
 @media (min-width: 768px) {
