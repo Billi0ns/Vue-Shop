@@ -1,5 +1,23 @@
 <template>
   <div class="container">
+    <div class="form-progress-bar">
+      <div class="badge-line"></div>
+      <div class="myBadge">
+        <div class="badge--finished">1</div>
+        <div>填寫資料</div>
+      </div>
+
+      <div class="myBadge middle-badge">
+        <div class="badge--unfinished ">2</div>
+        <div>進行付款</div>
+      </div>
+
+      <div class="myBadge">
+        <div class="badge--unfinished">3</div>
+        <div>訂單完成</div>
+      </div>
+    </div>
+
     <div class="cart-items">
       <h1 class="cart-items-title">購物車（{{ cartItems.length }}件）</h1>
 
@@ -84,77 +102,96 @@
         </tbody>
       </table>
     </div>
-    <div class="order">
-      <h1 class="order-title">
-        訂單資料
-      </h1>
 
-      <div class="item-container">
-        <div class="d-flex mb-2">
-          <div>小計:</div>
-          <div class="ml-auto">{{ subtotal | formatNumber }}</div>
-        </div>
-        <div class="d-flex mb-2">
-          <div>運費: (滿$1000免運費)</div>
-          <div class="ml-auto">{{ shippingCost | formatNumber }}</div>
-        </div>
-        <hr class="hr-line" />
-        <div class="d-flex font-weight-bold ">
-          <div class="mb-2">合計:（{{ cartItems.length }}件）</div>
-          <div class="ml-auto">{{ total | formatNumber }}</div>
+    <div class="row mt-lg-4">
+      <div class="col-lg-6">
+        <div class="order">
+          <h1 class="order-title">
+            訂單資料
+          </h1>
+
+          <div class="item-container">
+            <div class="d-flex mb-2">
+              <div>小計:</div>
+              <div class="ml-auto">{{ subtotal | formatNumber }}</div>
+            </div>
+            <div class="d-flex mb-2">
+              <div>運費: (滿$999免運費)</div>
+              <div class="ml-auto">{{ shippingCost | formatNumber }}</div>
+            </div>
+            <hr class="hr-line" />
+            <div class="d-flex font-weight-bold ">
+              <div class="mb-2">合計:（{{ cartItems.length }}件）</div>
+              <div class="ml-auto">{{ total | formatNumber }}</div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="order">
-      <h1 class="order-title">
-        送貨資料
-      </h1>
+      <div class="col-lg-6">
+        <div class="order">
+          <h1 class="order-title">
+            送貨資料
+          </h1>
 
-      <div class="item-container">
-        <b-form @submit="onSubmit" class="text-left order-form">
-          <b-form-group id="input-group-1" label="顧客名稱" label-for="input-1">
-            <b-form-input
-              id="input-1"
-              v-model="form.name"
-              type="text"
-              required
-            ></b-form-input>
-          </b-form-group>
+          <div class="item-container">
+            <b-form @submit="onSubmit" class="text-left order-form">
+              <b-form-group
+                id="input-group-1"
+                label="顧客名稱"
+                label-for="input-1"
+              >
+                <b-form-input
+                  id="input-1"
+                  v-model="form.name"
+                  type="text"
+                  required
+                ></b-form-input>
+              </b-form-group>
 
-          <b-form-group id="input-group-2" label="電子信箱" label-for="input-2">
-            <b-form-input
-              id="input-2"
-              v-model="form.email"
-              type="email"
-              required
-            ></b-form-input>
-            <b-form-invalid-feedback :state="emailValidation">
-              請輸入有效的電子郵件地址
-            </b-form-invalid-feedback>
-          </b-form-group>
+              <b-form-group
+                id="input-group-2"
+                label="電子信箱"
+                label-for="input-2"
+              >
+                <b-form-input
+                  id="input-2"
+                  v-model="form.email"
+                  type="email"
+                  required
+                ></b-form-input>
+                <b-form-invalid-feedback :state="emailValidation">
+                  請輸入有效的電子郵件地址
+                </b-form-invalid-feedback>
+              </b-form-group>
 
-          <b-form-group id="input-group-3" label="電話號碼" label-for="input-3">
-            <b-form-input
-              id="input-3"
-              v-model="form.phone"
-              required
-            ></b-form-input>
-            <b-form-invalid-feedback :state="phoneValidation">
-              請輸入正確手機格式 （10碼）
-            </b-form-invalid-feedback>
-          </b-form-group>
+              <b-form-group
+                id="input-group-3"
+                label="電話號碼"
+                label-for="input-3"
+              >
+                <b-form-input
+                  id="input-3"
+                  v-model="form.phone"
+                  required
+                ></b-form-input>
+                <b-form-invalid-feedback :state="phoneValidation">
+                  請輸入正確手機格式 （10碼）
+                </b-form-invalid-feedback>
+              </b-form-group>
 
-          <b-form-group id="input-group-4" label="地址" label-for="input-4">
-            <b-form-input
-              id="input-4"
-              v-model="form.address"
-              required
-            ></b-form-input>
-          </b-form-group>
+              <b-form-group id="input-group-4" label="地址" label-for="input-4">
+                <b-form-input
+                  id="input-4"
+                  v-model="form.address"
+                  required
+                ></b-form-input>
+              </b-form-group>
 
-          <b-button type="submit" class="order-btn">前往結帳</b-button>
-        </b-form>
+              <b-button type="submit" class="order-btn">前往結帳</b-button>
+            </b-form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -188,7 +225,7 @@ export default {
       return sum;
     },
     shippingCost() {
-      if (this.subtotal >= 1000) {
+      if (this.subtotal >= 999) {
         return 0;
       }
       return 60;
@@ -233,6 +270,11 @@ export default {
     },
     onSubmit(evt) {
       evt.preventDefault();
+
+      if (this.cartItems.length === 0) {
+        alert('購物車內沒有商品！');
+        return;
+      }
       this.sendOrder();
       this.$router.push('/payment');
     },
@@ -361,6 +403,83 @@ export default {
     background-color: #449d44;
   }
 }
+
+// Progress Bar
+.form-progress-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 20px;
+
+  position: relative;
+}
+
+.badge-line {
+  position: absolute;
+  top: 14px;
+  left: 3%;
+  width: 93%;
+  height: 2px;
+  margin: 0 auto;
+  background: #cccccc;
+}
+
+.myBadge {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 75%;
+  font-weight: 700;
+}
+
+.badge--finished,
+.badge--unfinished {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.badge--finished {
+  background: rgb(158, 170, 178);
+}
+
+.badge--unfinished {
+  background: #cccccc;
+}
+
+.middle-badge {
+  margin: 0 auto;
+}
+
+/* .middle-badge::before,
+.middle-badge::after {
+  content: '';
+  width: 90px;
+  height: 2px;
+  background: #cccccc;
+  position: absolute;
+  top: 25%;
+  z-index: -1;
+}
+
+.middle-badge::before {
+  left: -10px;
+}
+
+.middle-badge::after {
+  right: -10px;
+} */
 
 @media (min-width: 768px) {
   .mobile-view {

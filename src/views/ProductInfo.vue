@@ -125,6 +125,7 @@ export default {
     $route(to, from) {
       // Get the info again if route changed
       this.setProductInfo();
+      this.amount = 1;
     },
   },
   created() {
