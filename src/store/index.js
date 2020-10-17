@@ -14,6 +14,9 @@ export default new Vuex.Store({
     setCurrentProduct(state, payload) {
       state.currentProduct = { ...payload };
     },
+    resetCurrentProduct(state) {
+      state.currentProduct = {};
+    },
     toggleCartModal(state, payload) {
       state.showCartModal = payload;
     },

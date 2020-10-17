@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-lg-1"></div>
         <div class="col-xs-12 col-md-6 col-lg-5 image-container">
-          <b-img :src="product.imageFile" fluid></b-img>
+          <b-img :src="product.imageFile" class="product-image"></b-img>
         </div>
         <div class="col-xs-12 col-md-6  col-lg-5 text-left">
           <h1 class="product-title">{{ product.title }}</h1>
@@ -87,27 +87,37 @@ export default {
 
       this.$store.commit('toggleCartListSlider', true);
     },
+    getProductInfo() {
+      const docRef = db.collection('products').doc(this.$route.params.id);
+
+      docRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            console.log('Document data:', doc.data());
+            this.product = {
+              id: doc.id,
+              ...doc.data(),
+            };
+          } else {
+            console.log('No such document!');
+            this.$router.replace({ name: 'Home' });
+          }
+        })
+        .catch((error) => {
+          console.log('Error getting document:', error);
+        });
+    },
   },
   created() {
-    const docRef = db.collection('products').doc(this.$route.params.id);
+    const { currentProduct } = this.$store.state;
 
-    docRef
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          console.log('Document data:', doc.data());
-          this.product = {
-            id: doc.id,
-            ...doc.data(),
-          };
-        } else {
-          console.log('No such document!');
-          this.$router.replace({ name: 'Home' });
-        }
-      })
-      .catch((error) => {
-        console.log('Error getting document:', error);
-      });
+    if (Object.keys(currentProduct).length !== 0) {
+      this.product = currentProduct;
+      this.$store.commit('resetCurrentProduct');
+    } else {
+      this.getProductInfo();
+    }
   },
 };
 </script>
@@ -116,6 +126,18 @@ export default {
 .image-container {
   padding: 0;
   margin-bottom: 20px;
+  height: 0;
+  padding-top: 100%;
+  position: relative;
+  background: #f6f7f8;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: auto;
 }
 
 .product-title {

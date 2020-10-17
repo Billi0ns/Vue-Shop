@@ -16,12 +16,12 @@
             <div
               :style="{ backgroundImage: getImageUrl(item.imageFile) }"
               class="item-info__img"
-              @click="handleUrl(item.id)"
+              @click="handleUrl(item)"
             ></div>
           </div>
 
           <div class="w-100">
-            <div class="item-info__title" @click="handleUrl(item.id)">
+            <div class="item-info__title" @click="handleUrl(item)">
               {{ item.title }}
             </div>
             <b-form-spinbutton
@@ -88,9 +88,10 @@ export default {
     getImageUrl(image) {
       return `url(${image})`;
     },
-    handleUrl(id) {
+    handleUrl(item) {
       this.hideCartList();
-      this.$router.push({ path: `products/${id}` });
+      this.$store.commit('setCurrentProduct', item);
+      this.$router.push({ path: `products/${item.id}` });
     },
   },
   created() {

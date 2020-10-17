@@ -44,6 +44,7 @@ export default {
       this.$store.commit('setCurrentProduct', this.product);
     },
     handleUrl() {
+      this.$store.commit('setCurrentProduct', this.product);
       this.$router.push({ path: `products/${this.product.id}` });
     },
   },
