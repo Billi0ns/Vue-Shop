@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col">
             <div class="image-container">
-              <b-img :src="product.imageFile" fluid></b-img>
+              <b-img :src="product.imageFile" class="product-image"></b-img>
               <span class="image-tag" @click="handleUrl"></span>
             </div>
           </div>
@@ -167,6 +167,19 @@ export default {
 
 .image-container {
   position: relative;
+
+  // To avoid content jumping when loading images
+  height: 0;
+  padding-top: 100%;
+  background: #f6f7f8;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: auto;
 }
 
 .image-tag::after {
