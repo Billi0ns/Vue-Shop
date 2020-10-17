@@ -10,9 +10,9 @@
               class="item-info__img"
               :src="item.imageFile"
               alt=""
-              @click="handleUrl(item.id)"
+              @click="handleUrl(item)"
             />
-            <div class="item-info__title" @click="handleUrl(item.id)">
+            <div class="item-info__title" @click="handleUrl(item)">
               {{ item.title }}
             </div>
             <div
@@ -56,9 +56,9 @@
                   class="item-info__img"
                   :src="item.imageFile"
                   alt=""
-                  @click="handleUrl(item.id)"
+                  @click="handleUrl(item)"
                 />
-                <div class="item-info__title" @click="handleUrl(item.id)">
+                <div class="item-info__title" @click="handleUrl(item)">
                   {{ item.title }}
                 </div>
               </div>
@@ -227,8 +227,9 @@ export default {
     updateCart(payload) {
       this.$store.commit('updateCart', payload);
     },
-    handleUrl(id) {
-      this.$router.push({ path: `products/${id}` });
+    handleUrl(item) {
+      this.$store.commit('setCurrentProduct', item);
+      this.$router.push({ path: `products/${item.id}` });
     },
     onSubmit(evt) {
       evt.preventDefault();

@@ -79,19 +79,13 @@ export default {
       this.selectedCategory = '商品分類：所有商品';
       this.dropdownShow = false;
 
-      docRef
-        .get()
-        .then((snapshot) => {
-          this.products = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-
-          console.log(this.products);
-        })
-        .catch((error) => {
-          console.log('Error getting document:', error);
-        });
+      docRef.onSnapshot((snapshot) => {
+        this.products = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        console.log("All data in 'products' collection", this.products);
+      });
     },
   },
   created() {

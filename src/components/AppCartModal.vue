@@ -92,6 +92,7 @@ export default {
         title: this.product.title,
         price: this.product.price,
         imageFile: this.product.imageFile,
+        description: this.product.description,
       });
 
       this.hideCartModal();
@@ -99,7 +100,7 @@ export default {
     },
     handleUrl() {
       this.hideCartModal();
-      this.$router.push({ path: `products/${this.product.id}` });
+      this.$router.push({ path: `/products/${this.product.id}` });
     },
   },
 };

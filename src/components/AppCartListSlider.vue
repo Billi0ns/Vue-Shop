@@ -91,7 +91,7 @@ export default {
     handleUrl(item) {
       this.hideCartList();
       this.$store.commit('setCurrentProduct', item);
-      this.$router.push({ path: `products/${item.id}` });
+      this.$router.push({ path: `/products/${item.id}` });
     },
   },
   created() {

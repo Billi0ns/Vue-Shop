@@ -83,9 +83,20 @@ export default {
         title: this.product.title,
         price: this.product.price,
         imageFile: this.product.imageFile,
+        description: this.product.description,
       });
 
       this.$store.commit('toggleCartListSlider', true);
+    },
+    setProductInfo() {
+      const { currentProduct } = this.$store.state;
+
+      if (Object.keys(currentProduct).length !== 0) {
+        this.product = currentProduct;
+        this.$store.commit('resetCurrentProduct');
+      } else {
+        this.getProductInfo();
+      }
     },
     getProductInfo() {
       const docRef = db.collection('products').doc(this.$route.params.id);
@@ -109,15 +120,15 @@ export default {
         });
     },
   },
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    $route(to, from) {
+      // Get the info again if route changed
+      this.setProductInfo();
+    },
+  },
   created() {
-    const { currentProduct } = this.$store.state;
-
-    if (Object.keys(currentProduct).length !== 0) {
-      this.product = currentProduct;
-      this.$store.commit('resetCurrentProduct');
-    } else {
-      this.getProductInfo();
-    }
+    this.setProductInfo();
   },
 };
 </script>
