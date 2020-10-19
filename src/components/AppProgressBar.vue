@@ -42,7 +42,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 80%;
-  max-width: 600px;
+  max-width: 500px;
   height: auto;
   margin: 20px auto;
   position: relative;

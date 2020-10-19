@@ -194,6 +194,7 @@ export default {
         phone: null,
         address: null,
       },
+      currentCheckout: '',
     };
   },
   computed: {
@@ -251,7 +252,7 @@ export default {
     },
     handleUrl(item) {
       this.$store.commit('setCurrentProduct', item);
-      this.$router.push({ path: `products/${item.id}` });
+      this.$router.push({ path: `/products/${item.id}` });
     },
     onSubmit(evt) {
       evt.preventDefault();
@@ -261,13 +262,13 @@ export default {
         return;
       }
       this.sendOrder();
-      this.$router.push('/payment');
     },
     sendOrder() {
       db.collection('orders')
         .add({
           createdAt: new Date(Date.now()),
           cartItems: this.cartItems,
+          form: this.form,
           total: this.total,
           id: null,
           isPayed: false,
@@ -279,6 +280,7 @@ export default {
             .update({
               id: docRef.id,
             });
+          this.$router.push(`/orderInfo/${docRef.id}`);
           this.$store.commit('resetCart');
         })
         .catch((error) => {
@@ -293,142 +295,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cart-items,
-.order {
-  border: 1px solid #ededed;
-  margin-bottom: 10px;
-}
-.cart-items-title,
-.order-title {
-  font-size: 18px;
-  background: #f6f6f6;
-  margin-bottom: 0;
-  padding: 10px;
-  text-align: left;
-}
-
-.item-container {
-  padding: 10px;
-  padding-right: 15px;
-}
-
-.item-container:not(:last-child) {
-  border-bottom: 1px solid #ededed;
-}
-
-.item-info {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.item-info__img {
-  width: 60px;
-  height: 60px;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.item-info__title {
-  color: #333;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.item-info__remove {
-  position: absolute;
-  top: -5px;
-  right: 0;
-  cursor: pointer;
-}
-
-.item-info__remove::after {
-  content: '\f00d';
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-  color: #7f7f7f;
-  margin-right: auto;
-}
-
-.item-price {
-  text-align: right;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.item-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.desktop-view {
-  display: none;
-}
-
-.title-header {
-  padding-left: 6rem;
-}
-
-.hr-line {
-  border-top: 1px solid #eee;
-}
-.order-form {
-  font-size: 14px;
-}
-.order-btn {
-  width: 100%;
-  padding: 5px 0;
-  border: none;
-  border-radius: 3px;
-  color: white;
-  background-color: #5cb85c;
-  border: 1px solid #4cae4c;
-  font-size: 15px;
-
-  &:hover {
-    background-color: #449d44;
-  }
-}
-
-@media (min-width: 768px) {
-  .mobile-view {
-    display: none;
-  }
-
-  .desktop-view {
-    display: table;
-  }
-
-  .cart-items-title {
-    margin-bottom: -16px;
-  }
-
-  .table th {
-    border-top: 1px solid #ededed;
-    border-bottom: 1px solid #ededed;
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  .table td {
-    vertical-align: middle;
-    border-top: 1px solid #ededed;
-  }
-
-  .item-info__img {
-    width: 70px;
-    height: 70px;
-  }
-
-  .remove-container {
-    position: relative;
-  }
-
-  .item-info__remove {
-    top: 37%;
-    right: 15px;
-  }
-}
+@import '@/assets/Order.scss';
 </style>
