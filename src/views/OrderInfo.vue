@@ -4,6 +4,28 @@
     <app-progress-bar :badgeNum="badgeNum"></app-progress-bar>
 
     <div class="row mx-auto">
+      <div class="mx-auto">
+        <div class="input-group mb-3 copy-container">
+          <div class="input-group-prepend">
+            <span class="input-group-text">訂單編號</span>
+          </div>
+          <input
+            class="form-control"
+            type="text"
+            :value="orderInfo.id"
+            ref="orderId"
+            readonly
+          />
+          <span
+            class="copy-text-icon"
+            id="copy-text-icon"
+            @click="copyOrderId"
+          ></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mx-auto">
       <div class="col-md-9 col-lg-7 mx-auto">
         <div class="cart-items">
           <h1 class="cart-items-title">購買清單（{{ cartItems.length }}件）</h1>
@@ -115,8 +137,18 @@
               v-if="!orderInfo.isPayed"
               class="order-btn mt-3"
               @click="completePayment"
-              >前往付款</b-button
             >
+              前往付款
+            </b-button>
+
+            <router-link
+              v-else
+              to="/products"
+              tag="button"
+              class="order-btn mt-3"
+            >
+              繼續逛逛 <i class="fas fa-arrow-right"></i>
+            </router-link>
           </div>
         </div>
       </div>
@@ -172,6 +204,8 @@ export default {
             this.orderInfo = doc.data();
           } else {
             console.log('No such document!');
+            this.$router.push('/products');
+            alert('查無此訂單');
           }
           this.loading = false;
         })
@@ -191,9 +225,14 @@ export default {
           this.getOrderInfo();
         })
         .catch((error) => {
-          // The document probably doesn't exist.
           console.error('Error updating document: ', error);
         });
+    },
+    copyOrderId() {
+      this.$refs.orderId.select();
+      document.execCommand('copy');
+      document.activeElement.blur();
+      this.$_makeToast('已複製到剪貼板！');
     },
   },
   created() {
@@ -216,5 +255,32 @@ export default {
 
 .payed {
   color: #28a745;
+}
+
+.form-control {
+  background: white;
+  border: 1px solid #ededed;
+  padding-right: 20px;
+}
+
+.copy-container {
+  position: relative;
+}
+
+.input-group-text {
+  background: #f6f6f6;
+  border: 1px solid #ededed;
+  font-weight: bold;
+}
+
+.copy-text-icon::before {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  content: '\f0c5';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 400;
+  cursor: pointer;
 }
 </style>
