@@ -1,6 +1,5 @@
 <template>
   <div v-if="!loading">
-    <app-header></app-header>
     <app-progress-bar :badgeNum="badgeNum"></app-progress-bar>
 
     <div class="row mx-auto">
@@ -157,14 +156,12 @@
 </template>
 
 <script>
-import AppHeader from '@/components/AppHeader.vue';
 import AppProgressBar from '@/components/AppProgressBar.vue';
 import { db } from '../firebase';
 
 export default {
   name: 'Payment',
   components: {
-    AppHeader,
     AppProgressBar,
   },
   data() {

@@ -9,6 +9,7 @@ export default new Vuex.Store({
     showCartModal: false,
     showCartListSlider: false,
     cartItems: [],
+    defaultRoute: true,
   },
   mutations: {
     setCurrentProduct(state, payload) {
@@ -61,6 +62,9 @@ export default new Vuex.Store({
     resetCart(state) {
       state.cartItems = [];
       localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
+    },
+    changeDefaultRoute(state, payload) {
+      state.defaultRoute = payload;
     },
   },
   actions: {},

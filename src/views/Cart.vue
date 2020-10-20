@@ -1,19 +1,19 @@
 <template>
   <div>
-    <app-header></app-header>
     <app-cart-items></app-cart-items>
   </div>
 </template>
 
 <script>
-import AppHeader from '@/components/AppHeader.vue';
 import AppCartItems from '@/components/AppCartItems.vue';
 
 export default {
   name: 'Cart',
   components: {
-    AppHeader,
     AppCartItems,
+  },
+  created() {
+    this.$store.commit('changeDefaultRoute', true);
   },
 };
 </script>

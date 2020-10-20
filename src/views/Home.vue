@@ -1,19 +1,15 @@
 <template>
   <div class="home">
-    <app-header></app-header>
-
     <img src="../assets/hero-image.jpg" class="hero-image mb-3" alt="" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import AppHeader from '@/components/AppHeader.vue';
-
 export default {
   name: 'Home',
-  components: {
-    AppHeader,
+
+  created() {
+    this.$store.commit('changeDefaultRoute', true);
   },
 };
 </script>

@@ -1,7 +1,5 @@
 <template>
   <div>
-    <app-header></app-header>
-
     <div class="container mt-md-5">
       <div class="row">
         <div class="col-lg-1"></div>
@@ -52,7 +50,6 @@
 </template>
 
 <script>
-import AppHeader from '@/components/AppHeader.vue';
 import { db } from '../firebase';
 
 export default {
@@ -71,9 +68,7 @@ export default {
       return '尚無產品說明';
     },
   },
-  components: {
-    AppHeader,
-  },
+
   methods: {
     addToCartHandler() {
       console.log(`購買${this.product.title} ${this.amount} 份`);
@@ -130,6 +125,7 @@ export default {
   },
   created() {
     this.setProductInfo();
+    this.$store.commit('changeDefaultRoute', true);
   },
 };
 </script>

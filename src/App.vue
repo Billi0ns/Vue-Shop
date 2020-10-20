@@ -1,8 +1,24 @@
 <template>
   <div id="app">
+    <app-header v-if="defaultRoute"></app-header>
     <router-view />
   </div>
 </template>
+
+<script>
+import AppHeader from '@/components/AppHeader.vue';
+
+export default {
+  computed: {
+    defaultRoute() {
+      return this.$store.state.defaultRoute;
+    },
+  },
+  components: {
+    AppHeader,
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
