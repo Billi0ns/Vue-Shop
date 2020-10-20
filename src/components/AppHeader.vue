@@ -1,28 +1,45 @@
 <template>
   <div class="mb-3">
-    <b-navbar toggleable="md" type="light" variant="light">
-      <b-navbar-brand href="#">商標</b-navbar-brand>
+    <b-navbar toggleable="md" type="light" class="customNav">
+      <router-link to="/">
+        <b-navbar-brand>
+          <img class="logo" src="../assets/logo.png" alt="" />
+        </b-navbar-brand>
+      </router-link>
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-nav class="ml-auto mr-2 d-flex">
+        <b-nav-item class="mobile-cart">
+          <router-link to="/cart" tag="li">
+            <i class="fas fa-shopping-cart">
+              <span v-if="itemsAmount > 0" class="badge-number">
+                {{ itemsAmount }}
+              </span>
+            </i>
+          </router-link>
+        </b-nav-item>
+      </b-navbar-nav>
+
+      <b-navbar-toggle
+        target="nav-collapse"
+        class="navbarToggle"
+      ></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item>
-            <router-link to="/" tag="li">首頁</router-link>
-          </b-nav-item>
-          <b-nav-item>
             <router-link to="/products" tag="li">商品列表</router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/aboutUs" tag="li">關於我們</router-link>
+            <router-link to="/getOrderInfo" tag="li">查詢訂單</router-link>
           </b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item>
+          <b-nav-item class="hideOnMobile">
             <router-link to="/cart" tag="li">購物車</router-link>
           </b-nav-item>
+
           <b-nav-item @click="handleLogin">
             後台管理
           </b-nav-item>
@@ -53,6 +70,9 @@ export default {
     showCartList() {
       return this.$store.state.showCartListSlider;
     },
+    itemsAmount() {
+      return this.$store.state.cartItems.length;
+    },
   },
   methods: {
     handleLogin() {
@@ -79,5 +99,56 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.fa-shopping-cart {
+  font-size: 23px;
+  margin-top: 4px;
+  position: relative;
+}
+
+.badge-number {
+  color: white;
+  font-size: 12px;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  line-height: 18px;
+  position: absolute;
+  top: -9px;
+  right: -12px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ff6347;
+}
+
+.navbarToggle {
+  border: none;
+}
+
+.logo {
+  max-width: 150px;
+  height: auto;
+}
+
+.customNav {
+  background: white;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.06);
+}
+
+.hideOnMobile {
+  display: none;
+}
+@media (min-width: 768px) {
+  .logo {
+    max-width: 200px;
+  }
+
+  .mobile-cart {
+    display: none;
+  }
+
+  .hideOnMobile {
+    display: block;
+  }
 }
 </style>

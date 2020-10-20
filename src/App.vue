@@ -2,11 +2,13 @@
   <div id="app">
     <app-header v-if="defaultRoute"></app-header>
     <router-view />
+    <app-footer v-if="defaultRoute"></app-footer>
   </div>
 </template>
 
 <script>
 import AppHeader from '@/components/AppHeader.vue';
+import AppFooter from '@/components/AppFooter.vue';
 
 export default {
   computed: {
@@ -16,6 +18,7 @@ export default {
   },
   components: {
     AppHeader,
+    AppFooter,
   },
 };
 </script>

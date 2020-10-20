@@ -57,7 +57,7 @@ export default {
 
       const docRef = db
         .collection('products')
-        .where('isEnabled', '==', 'true')
+        .where('isEnabled', '==', true)
         .where('category', '==', category);
 
       docRef
