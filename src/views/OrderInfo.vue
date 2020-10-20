@@ -222,6 +222,7 @@ export default {
         })
         .then(() => {
           console.log('Document successfully updated!');
+          this.$_makeToast('付款完成！');
           this.getOrderInfo();
         })
         .catch((error) => {
@@ -250,7 +251,7 @@ export default {
 }
 
 .notPayed {
-  color: #dc3545;
+  color: #6c757d;
 }
 
 .payed {

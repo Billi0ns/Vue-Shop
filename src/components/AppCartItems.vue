@@ -6,7 +6,7 @@
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto mt-4">
         <i class="fas fa-shopping-cart"></i>
         <h5 class="font-weight-bold">你的購物車是空的</h5>
-        <p class="mb-5">記得加入商品到你的購物車</p>
+        <p class="mb-5">記得加商品到你的購物車</p>
 
         <router-link to="/products" tag="button" class="order-btn">
           繼續購物

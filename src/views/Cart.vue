@@ -1,4 +1,4 @@
-;<template>
+<template>
   <div>
     <app-header></app-header>
     <app-cart-items></app-cart-items>

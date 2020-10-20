@@ -34,7 +34,8 @@
           <td>{{ product.category }}</td>
           <td>{{ product.title }}</td>
           <td>{{ product.price | formatNumber }}</td>
-          <td>{{ product.isEnabled }}</td>
+          <td v-if="product.isEnabled" :style="{ color: '#28a745' }">已啟用</td>
+          <td v-else :style="{ color: '#6c757d' }">未啟用</td>
           <td>{{ getReadableDate(product.createdAt) }}</td>
           <td>
             <b-button
@@ -100,6 +101,7 @@ export default {
       activeProduct: {},
     };
   },
+
   components: {
     AppProductForm,
   },

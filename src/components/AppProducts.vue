@@ -75,7 +75,7 @@ export default {
         });
     },
     getAllProducts() {
-      const docRef = db.collection('products').where('isEnabled', '==', 'true');
+      const docRef = db.collection('products').where('isEnabled', '==', true);
       this.selectedCategory = '商品分類：所有商品';
       this.dropdownShow = false;
 

@@ -64,8 +64,6 @@
             id="product-checkbox"
             v-model="form.isEnabled"
             name="product-checkbox"
-            value="true"
-            unchecked-value="false"
           >
             是否啟用
           </b-form-checkbox>

@@ -18,7 +18,8 @@
             {{ getItemsList(order.cartItems) }}
           </td>
           <td>{{ order.total | formatNumber }}</td>
-          <td>{{ order.isPayed }}</td>
+          <td v-if="order.isPayed" class="payed">已付款</td>
+          <td v-else class="notPayed">尚未付款</td>
           <td>{{ getReadableDate(order.createdAt) }}</td>
         </tr>
       </tbody>
@@ -67,5 +68,18 @@ export default {
 <style lang="scss" scoped>
 td {
   white-space: pre;
+}
+
+.payed,
+.notPayed {
+  font-weight: bold;
+}
+
+.notPayed {
+  color: #6c757d;
+}
+
+.payed {
+  color: #28a745;
 }
 </style>
