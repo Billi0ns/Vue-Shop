@@ -11,11 +11,7 @@ const routes = [
     name: 'Home',
     component: Home,
   },
-  {
-    path: '/products',
-    name: 'Products',
-    component: () => import('../views/Products.vue'),
-  },
+
   {
     path: '/products/:id',
     component: () => import('../views/ProductInfo.vue'),
@@ -61,7 +57,6 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
-  // eslint-disable-next-line no-unused-vars
   scrollBehavior() {
     return { x: 0, y: 0 };
   },

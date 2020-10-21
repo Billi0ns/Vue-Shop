@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <app-header v-if="defaultRoute"></app-header>
-    <div class="fixed-top-padding"></div>
+    <div v-if="defaultRoute" class="fixed-top-padding"></div>
     <router-view />
     <app-footer v-if="defaultRoute"></app-footer>
   </div>

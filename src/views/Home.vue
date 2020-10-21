@@ -57,6 +57,11 @@ export default {
       dropdownShow: false,
     };
   },
+  computed: {
+    scrollPosition() {
+      return this.$store.state.scrollPosition;
+    },
+  },
   methods: {
     getCategory(category) {
       this.selectedCategory = `商品分類：${category}`;
@@ -101,10 +106,18 @@ export default {
   created() {
     this.getAllProducts();
     this.$store.commit('changeDefaultRoute', true);
+
+    window.setTimeout(() => {
+      window.scrollTo(0, this.scrollPosition);
+    }, 10);
   },
   components: {
     AppProduct,
     AppCartModal,
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$store.commit('setScrollPosition', window.pageYOffset);
+    next();
   },
 };
 </script>
