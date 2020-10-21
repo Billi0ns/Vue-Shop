@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <app-header v-if="defaultRoute"></app-header>
+    <div class="fixed-top-padding"></div>
     <router-view />
     <app-footer v-if="defaultRoute"></app-footer>
   </div>
@@ -34,5 +35,15 @@ export default {
 
 body {
   overflow-y: scroll;
+}
+
+.fixed-top-padding {
+  padding-top: 80px;
+}
+
+@media (min-width: 768px) {
+  .fixed-top-padding {
+    padding-top: 100px;
+  }
 }
 </style>

@@ -140,12 +140,7 @@
               前往付款
             </b-button>
 
-            <router-link
-              v-else
-              to="/products"
-              tag="button"
-              class="order-btn mt-3"
-            >
+            <router-link v-else to="/" tag="button" class="order-btn mt-3">
               繼續逛逛 <i class="fas fa-arrow-right"></i>
             </router-link>
           </div>
@@ -201,7 +196,7 @@ export default {
             this.orderInfo = doc.data();
           } else {
             console.log('No such document!');
-            this.$router.push('/products');
+            this.$router.push('/');
             alert('查無此訂單');
           }
           this.loading = false;

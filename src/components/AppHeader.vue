@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-3">
+  <div class="mb-3 fixed-top">
     <b-navbar toggleable="md" type="light" class="customNav">
       <router-link to="/">
         <b-navbar-brand>
@@ -25,17 +25,10 @@
       ></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item>
-            <router-link to="/products" tag="li">商品列表</router-link>
-          </b-nav-item>
+        <b-navbar-nav class="ml-auto">
           <b-nav-item>
             <router-link to="/getOrderInfo" tag="li">查詢訂單</router-link>
           </b-nav-item>
-        </b-navbar-nav>
-
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
           <b-nav-item class="hideOnMobile">
             <router-link to="/cart" tag="li">購物車</router-link>
           </b-nav-item>
@@ -138,6 +131,11 @@ export default {
 .hideOnMobile {
   display: none;
 }
+
+.fixed-top {
+  z-index: 10;
+}
+
 @media (min-width: 768px) {
   .logo {
     max-width: 200px;
@@ -149,6 +147,18 @@ export default {
 
   .hideOnMobile {
     display: block;
+  }
+
+  .navbar-brand {
+    transform: translateX(-50%) translateY(-50%);
+    left: 50%;
+    position: absolute;
+    // margin-left: 30px;
+  }
+
+  .navbar-collapse {
+    flex-grow: 0;
+    padding: 15px 0;
   }
 }
 </style>

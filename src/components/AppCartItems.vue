@@ -8,7 +8,7 @@
         <h5 class="font-weight-bold">你的購物車是空的</h5>
         <p class="mb-5">記得加商品到你的購物車</p>
 
-        <router-link to="/products" tag="button" class="order-btn">
+        <router-link to="/" tag="button" class="order-btn">
           繼續購物
         </router-link>
       </div>
