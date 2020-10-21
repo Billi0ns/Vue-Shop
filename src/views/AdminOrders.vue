@@ -8,7 +8,6 @@
           <th scope="col">總金額</th>
           <th scope="col">付款狀態</th>
           <th scope="col">訂單日期</th>
-          <th scope="col">編輯</th>
         </tr>
       </thead>
       <tbody>

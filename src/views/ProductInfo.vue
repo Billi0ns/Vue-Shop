@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container mt-md-5">
+    <div class="container my-md-5">
       <div class="row">
         <div class="col-lg-1"></div>
         <div class="col-xs-12 col-md-6 col-lg-5 image-container">

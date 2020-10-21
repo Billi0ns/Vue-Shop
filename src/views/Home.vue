@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <img src="../assets/hero-image.jpg" class="hero-image mb-3" alt="" />
+    <div class="px-0 container-md">
+      <img src="../assets/hero-image.jpg" class="hero-image mb-3" alt="" />
+    </div>
   </div>
 </template>
 
