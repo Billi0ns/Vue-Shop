@@ -50,6 +50,7 @@ import AppCartModal from '@/components/AppCartModal.vue';
 import { db } from '../firebase';
 
 export default {
+  name: 'Home',
   data() {
     return {
       products: [],
@@ -103,8 +104,10 @@ export default {
       });
     },
   },
-  created() {
+  mounted() {
     this.getAllProducts();
+  },
+  activated() {
     this.$store.commit('changeDefaultRoute', true);
 
     window.setTimeout(() => {

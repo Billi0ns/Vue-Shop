@@ -2,7 +2,10 @@
   <div id="app">
     <app-header v-if="defaultRoute"></app-header>
     <div v-if="defaultRoute" class="fixed-top-padding"></div>
-    <router-view />
+    <keep-alive include="Home">
+      <router-view />
+    </keep-alive>
+
     <app-footer v-if="defaultRoute"></app-footer>
   </div>
 </template>
