@@ -13,10 +13,12 @@
 
     <transition name="component-fade" mode="out-in">
       <router-view
-        v-if="!$route.meta.keepAlive"
+        v-if="!$route.meta.keepAlive && !$route.meta.requiresAuth"
         :key="$route.name + ($route.params.id || null)"
       ></router-view>
     </transition>
+
+    <router-view v-if="$route.meta.requiresAuth"></router-view>
 
     <app-footer v-if="defaultRoute"></app-footer>
   </div>
@@ -64,7 +66,7 @@ body {
 
 .component-fade-enter-active,
 .component-fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease-out;
 }
 .component-fade-enter,
 .component-fade-leave-to {

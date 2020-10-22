@@ -42,11 +42,13 @@ const routes = [
       {
         path: 'orders',
         component: () => import('../views/AdminOrders.vue'),
+        meta: { requiresAuth: true },
       },
       {
         path: '',
         name: 'Admin',
         component: () => import('../views/AdminProducts.vue'),
+        meta: { requiresAuth: true },
       },
     ],
   },

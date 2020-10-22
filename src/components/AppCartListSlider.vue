@@ -8,43 +8,45 @@
       @click.stop
     >
       <div class="cart-list__items">
-        <div
-          v-for="item in cartItems"
-          :key="item.id"
-          class="d-flex item-container"
-        >
-          <div>
-            <div
-              :style="{ backgroundImage: getImageUrl(item.imageFile) }"
-              class="item-info__img"
-              @click="handleUrl(item)"
-            ></div>
-          </div>
-
-          <div class="w-100">
-            <div class="item-info__title" @click="handleUrl(item)">
-              {{ item.title }}
-            </div>
-            <b-form-spinbutton
-              v-model="item.amount"
-              min="1"
-              max="30"
-              size="sm"
-              class="my-2"
-              style="width: 7rem"
-            ></b-form-spinbutton>
-
-            <div class="item-bottom">
-              <div class="prize-details">
-                單價：{{ item.price | formatNumber }}
-              </div>
+        <transition-group name="slide">
+          <div
+            v-for="item in cartItems"
+            :key="item.id"
+            class="d-flex item-container"
+          >
+            <div>
               <div
-                class="item-info__remove"
-                @click="deleteItemHandler(item.id)"
+                :style="{ backgroundImage: getImageUrl(item.imageFile) }"
+                class="item-info__img"
+                @click="handleUrl(item)"
               ></div>
             </div>
+
+            <div class="w-100">
+              <div class="item-info__title" @click="handleUrl(item)">
+                {{ item.title }}
+              </div>
+              <b-form-spinbutton
+                v-model="item.amount"
+                min="1"
+                max="30"
+                size="sm"
+                class="my-2"
+                style="width: 7rem"
+              ></b-form-spinbutton>
+
+              <div class="item-bottom">
+                <div class="prize-details">
+                  單價：{{ item.price | formatNumber }}
+                </div>
+                <div
+                  class="item-info__remove"
+                  @click="deleteItemHandler(item.id)"
+                ></div>
+              </div>
+            </div>
           </div>
-        </div>
+        </transition-group>
       </div>
 
       <div @click="hideCartList">
@@ -214,5 +216,15 @@ export default {
   .cart-list__items {
     max-height: 500px;
   }
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease-out;
+}
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-250px);
 }
 </style>
