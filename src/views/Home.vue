@@ -22,7 +22,7 @@
             @mouseover="dropdownShow = true"
             @mouseleave="dropdownShow = false"
           >
-            <li @click="getAllProducts">所有商品</li>
+            <li @click="setAllProducts">所有商品</li>
             <li @click="getCategory('重乳酪')">重乳酪蛋糕</li>
             <li @click="getCategory('輕乳酪')">輕乳酪蛋糕</li>
             <li @click="getCategory('禮盒')">禮盒</li>
@@ -54,54 +54,39 @@ export default {
   data() {
     return {
       products: [],
+      allProducts: [],
       selectedCategory: '商品分類',
       dropdownShow: false,
     };
-  },
-  computed: {
-    scrollPosition() {
-      return this.$store.state.scrollPosition;
-    },
   },
   methods: {
     getCategory(category) {
       this.selectedCategory = `商品分類：${category}`;
       this.dropdownShow = false;
 
-      const docRef = db
-        .collection('products')
-        .where('isEnabled', '==', true)
-        .where('category', '==', category);
-
-      docRef
-        .get()
-        .then((snapshot) => {
-          this.products = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-
-          console.log(this.products);
-        })
-        .catch((error) => {
-          console.log('Error getting document:', error);
-        });
+      this.products = [
+        ...this.allProducts.filter((product) => product.category === category),
+      ];
     },
     getAllProducts() {
       const docRef = db
         .collection('products')
         .where('isEnabled', '==', true)
         .orderBy('category');
-      this.selectedCategory = '商品分類：所有商品';
-      this.dropdownShow = false;
 
       docRef.onSnapshot((snapshot) => {
-        this.products = snapshot.docs.map((doc) => ({
+        this.allProducts = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        console.log("All data in 'products' collection", this.products);
+        console.log("All data in 'products' collection", this.allProducts);
+        this.setAllProducts();
       });
+    },
+    setAllProducts() {
+      this.products = [...this.allProducts];
+      this.selectedCategory = '商品分類：所有商品';
+      this.dropdownShow = false;
     },
   },
   mounted() {
@@ -109,18 +94,10 @@ export default {
   },
   activated() {
     this.$store.commit('changeDefaultRoute', true);
-
-    window.setTimeout(() => {
-      window.scrollTo(0, this.scrollPosition);
-    }, 10);
   },
   components: {
     AppProduct,
     AppCartModal,
-  },
-  beforeRouteLeave(to, from, next) {
-    this.$store.commit('setScrollPosition', window.pageYOffset);
-    next();
   },
 };
 </script>

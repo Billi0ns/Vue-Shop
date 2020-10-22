@@ -10,7 +10,6 @@ export default new Vuex.Store({
     showCartListSlider: false,
     cartItems: [],
     defaultRoute: true,
-    scrollPosition: 0,
   },
   mutations: {
     setCurrentProduct(state, payload) {
@@ -66,9 +65,6 @@ export default new Vuex.Store({
     },
     changeDefaultRoute(state, payload) {
       state.defaultRoute = payload;
-    },
-    setScrollPosition(state, payload) {
-      state.scrollPosition = payload;
     },
   },
   actions: {},
