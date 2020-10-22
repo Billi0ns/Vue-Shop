@@ -22,6 +22,10 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+.footer {
+  margin-top: 80px;
+}
+
 .fab {
   font-size: 30px;
   padding: 0 10px;
