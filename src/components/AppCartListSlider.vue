@@ -1,10 +1,11 @@
 <template>
-  <div class="cart-list">
+  <div class="cart-list " @click="hideCartList">
     <div
       class="cart-list__content"
       @mouseover="focusStatus = true"
       @mouseleave="focusStatus = false"
       @touchstart="focusStatus = true"
+      @click.stop
     >
       <div class="cart-list__items">
         <div
@@ -52,7 +53,6 @@
         </router-link>
       </div>
     </div>
-    <div class="cart-list__backdrop" @click="hideCartList"></div>
   </div>
 </template>
 
@@ -115,19 +115,10 @@ export default {
   overflow: auto;
 }
 
-.cart-list__backdrop {
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
 .cart-list__content {
   position: relative;
   z-index: 2;
+  z-index: 11;
   background-color: #fefefe;
   width: 300px;
   max-width: 80%;
@@ -217,7 +208,7 @@ export default {
 
   .cart-list__content {
     height: auto;
-    margin-top: 56px;
+    margin-top: 86px;
   }
 
   .cart-list__items {

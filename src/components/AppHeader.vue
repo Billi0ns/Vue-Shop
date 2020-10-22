@@ -42,8 +42,12 @@
 
     <app-login></app-login>
 
-    <transition name="fade">
+    <transition name="slide">
       <app-cart-list-slider v-if="showCartList"></app-cart-list-slider>
+    </transition>
+
+    <transition name="fade">
+      <div class="cart-list__backdrop" v-if="showCartList"></div>
     </transition>
   </div>
 </template>
@@ -84,16 +88,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// Transition
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
 .fa-shopping-cart {
   font-size: 23px;
   margin-top: 4px;
@@ -153,12 +147,41 @@ export default {
     transform: translateX(-50%) translateY(-50%);
     left: 50%;
     position: absolute;
-    // margin-left: 30px;
   }
 
   .navbar-collapse {
     flex-grow: 0;
     padding: 15px 0;
   }
+}
+
+.cart-list__backdrop {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+// Transition
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease-out;
+}
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-250px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
