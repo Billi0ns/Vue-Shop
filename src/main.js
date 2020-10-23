@@ -1,8 +1,6 @@
 import Vue from 'vue';
 import {
   ButtonPlugin,
-  CollapsePlugin,
-  DropdownPlugin,
   FormPlugin,
   FormCheckboxPlugin,
   FormFilePlugin,
@@ -28,8 +26,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 [
   ButtonPlugin,
-  CollapsePlugin,
-  DropdownPlugin,
   FormPlugin,
   FormCheckboxPlugin,
   FormFilePlugin,

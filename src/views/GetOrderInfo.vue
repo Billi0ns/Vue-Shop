@@ -49,7 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  background: url('../assets/background.jpg');
+  background: #f6f7f8 url('../assets/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   padding: 100px 50px;

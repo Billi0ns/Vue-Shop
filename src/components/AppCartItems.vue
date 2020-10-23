@@ -18,36 +18,44 @@
         <h1 class="cart-items-title">購物車（{{ cartItems.length }}件）</h1>
 
         <div class="mobile-view">
-          <div v-for="item in cartItems" :key="item.id" class="item-container ">
-            <div class="item-info">
-              <img
-                class="item-info__img"
-                :src="item.imageFile"
-                alt=""
-                @click="handleUrl(item)"
-              />
-              <div class="item-info__title" @click="handleUrl(item)">
-                {{ item.title }}
+          <transition-group name="slide">
+            <div
+              v-for="item in cartItems"
+              :key="item.id"
+              class="item-container "
+            >
+              <div class="item-info">
+                <img
+                  class="item-info__img"
+                  :src="item.imageFile"
+                  alt=""
+                  @click="handleUrl(item)"
+                />
+                <div class="item-info__title" @click="handleUrl(item)">
+                  {{ item.title }}
+                </div>
+                <div
+                  class="item-info__remove"
+                  @click="deleteItemHandler(item.id)"
+                ></div>
               </div>
-              <div
-                class="item-info__remove"
-                @click="deleteItemHandler(item.id)"
-              ></div>
-            </div>
-            <div class="item-price">單價：{{ item.price | formatNumber }}</div>
-            <div class="item-bottom">
-              <b-form-spinbutton
-                v-model="item.amount"
-                min="1"
-                max="30"
-                style="width: 9rem"
-                @change="updateCart({ id: item.id, amount: item.amount })"
-              ></b-form-spinbutton>
               <div class="item-price">
-                小計：{{ (item.price * item.amount) | formatNumber }}
+                單價：{{ item.price | formatNumber }}
+              </div>
+              <div class="item-bottom">
+                <b-form-spinbutton
+                  v-model="item.amount"
+                  min="1"
+                  max="30"
+                  style="width: 9rem"
+                  @change="updateCart({ id: item.id, amount: item.amount })"
+                ></b-form-spinbutton>
+                <div class="item-price">
+                  小計：{{ (item.price * item.amount) | formatNumber }}
+                </div>
               </div>
             </div>
-          </div>
+          </transition-group>
         </div>
 
         <table class="table mt-3 desktop-view">
@@ -62,7 +70,8 @@
               <th scope="col"></th>
             </tr>
           </thead>
-          <tbody>
+
+          <tbody name="slide" is="transition-group">
             <tr v-for="item in cartItems" :key="item.id">
               <td>
                 <div class="item-info">
@@ -313,5 +322,15 @@ export default {
   font-size: 100px;
   color: #cccccc;
   margin-bottom: 15px;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease-out;
+}
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-250px);
 }
 </style>
