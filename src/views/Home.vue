@@ -5,7 +5,7 @@
     </div>
 
     <div class="container">
-      <div class="d-flex justify-content-end mt-3 mr-3">
+      <div class="d-flex justify-content-end mt-3">
         <div class="dropdown">
           <div
             class="dropdown-title"

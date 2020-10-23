@@ -1,5 +1,23 @@
 import Vue from 'vue';
-import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
+import {
+  ButtonPlugin,
+  CollapsePlugin,
+  DropdownPlugin,
+  FormPlugin,
+  FormCheckboxPlugin,
+  FormFilePlugin,
+  FormTextareaPlugin,
+  FormInputPlugin,
+  FormSpinbuttonPlugin,
+  FormGroupPlugin,
+  ImagePlugin,
+  InputGroupPlugin,
+  LayoutPlugin,
+  ModalPlugin,
+  NavbarPlugin,
+  ToastPlugin,
+} from 'bootstrap-vue';
+
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -8,8 +26,26 @@ import { fb } from './firebase';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
-Vue.use(BootstrapVue);
-Vue.use(BootstrapVueIcons);
+[
+  ButtonPlugin,
+  CollapsePlugin,
+  DropdownPlugin,
+  FormPlugin,
+  FormCheckboxPlugin,
+  FormFilePlugin,
+  FormTextareaPlugin,
+  FormInputPlugin,
+  FormSpinbuttonPlugin,
+  FormGroupPlugin,
+  ImagePlugin,
+  InputGroupPlugin,
+  LayoutPlugin,
+  ModalPlugin,
+  NavbarPlugin,
+  ToastPlugin,
+].forEach((comp) => {
+  Vue.use(comp);
+});
 Vue.config.productionTip = false;
 
 let app = '';
