@@ -1,5 +1,5 @@
 <template>
-  <div style="{overflow: hidden}" @click.stop="mobileDropdownClose">
+  <div style="{overflow: hidden}" @click.stop>
     <div class="px-0 container-md">
       <picture>
         <source
@@ -101,11 +101,6 @@ export default {
       this.products = [...this.allProducts];
       this.selectedCategory = '商品分類：所有商品';
       this.dropdownShow = false;
-    },
-    mobileCloseDropdown() {
-      if (this.dropdownShow) {
-        this.dropdownShow = false;
-      }
     },
   },
   mounted() {
