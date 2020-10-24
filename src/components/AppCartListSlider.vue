@@ -63,6 +63,7 @@ export default {
   data() {
     return {
       focusStatus: false,
+      timeoutID: null,
     };
   },
   computed: {
@@ -97,11 +98,14 @@ export default {
     },
   },
   created() {
-    setTimeout(() => {
+    this.timeoutID = setTimeout(() => {
       if (!this.focusStatus) {
         this.$store.commit('toggleCartListSlider', false);
       }
     }, 3000);
+  },
+  beforeDestroy() {
+    window.clearTimeout(this.timeoutID);
   },
 };
 </script>
