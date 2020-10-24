@@ -1,7 +1,14 @@
 <template>
   <div style="{overflow: hidden}">
     <div class="px-0 container-md">
-      <img src="../assets/hero-image.jpg" class="hero-image mb-3" alt="" />
+      <picture>
+        <source
+          srcset="../assets/hero-image__small.jpg"
+          media="(max-width: 450px)"
+        />
+        <source srcset="../assets/hero-image.jpg" />
+        <img src="../assets/hero-image.jpg" class="hero-image mb-3" alt="" />
+      </picture>
     </div>
 
     <div class="container">
