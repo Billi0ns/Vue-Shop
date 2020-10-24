@@ -55,7 +55,7 @@ body {
 }
 
 .fixed-top-padding {
-  padding-top: 80px;
+  padding-top: 70px;
 }
 
 @media (min-width: 768px) {

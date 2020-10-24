@@ -3,10 +3,17 @@
     <div class="px-0 container-md">
       <picture>
         <source
+          srcset="../assets/hero-image__small.webp"
+          media="(max-width: 450px)"
+          type="image/webp"
+        />
+        <source
           srcset="../assets/hero-image__small.jpg"
           media="(max-width: 450px)"
+          type="image/jpeg"
         />
-        <source srcset="../assets/hero-image.jpg" />
+        <source srcset="../assets/hero-image.webp" type="image/webp" />
+        <source srcset="../assets/hero-image.jpg" type="image/jpeg" />
         <img src="../assets/hero-image.jpg" class="hero-image mb-3" alt="" />
       </picture>
     </div>
