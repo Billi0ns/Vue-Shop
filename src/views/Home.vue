@@ -3,22 +3,26 @@
     <div class="px-0 container-md">
       <picture>
         <source
-          srcset="../assets/hero-image__small.webp"
+          srcset="@/assets/hero-image__small.webp"
           media="(max-width: 450px)"
           type="image/webp"
         />
         <source
-          srcset="../assets/hero-image__small.jpg"
+          srcset="@/assets/hero-image__small.jpg"
           media="(max-width: 450px)"
           type="image/jpeg"
         />
-        <source srcset="../assets/hero-image.webp" type="image/webp" />
-        <source srcset="../assets/hero-image.jpg" type="image/jpeg" />
-        <img src="../assets/hero-image.jpg" class="hero-image mb-3" alt="" />
+        <source srcset="@/assets/hero-image.webp" type="image/webp" />
+        <source srcset="@/assets/hero-image.jpg" type="image/jpeg" />
+        <img
+          src="@/assets/hero-image.jpg"
+          class="hero-image mb-3"
+          alt="Delicious piece of cake and flower on wooden table"
+        />
       </picture>
     </div>
 
-    <div class="container">
+    <main class="container">
       <div class="d-flex justify-content-end mt-3">
         <div class="dropdown">
           <div
@@ -54,7 +58,7 @@
       </div>
 
       <app-cart-modal></app-cart-modal>
-    </div>
+    </main>
   </div>
 </template>
 
@@ -93,7 +97,7 @@ export default {
           id: doc.id,
           ...doc.data(),
         }));
-        console.log("All data in 'products' collection", this.allProducts);
+
         this.setAllProducts();
       });
     },
@@ -117,6 +121,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.hero-image {
+  max-width: 100%;
+  height: auto;
+}
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -136,8 +145,8 @@ export default {
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     position: absolute;
-    right: 0;
     top: 0;
+    right: 0;
   }
 }
 
@@ -173,10 +182,5 @@ export default {
     color: white;
     background-color: rgb(253, 100, 78);
   }
-}
-
-.hero-image {
-  max-width: 100%;
-  height: auto;
 }
 </style>

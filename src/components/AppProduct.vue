@@ -45,7 +45,7 @@ export default {
     },
     handleUrl() {
       this.$store.commit('setCurrentProduct', this.product);
-      this.$router.push({ path: `products/${this.product.id}` });
+      this.$router.push({ path: `/products/${this.product.id}` });
     },
   },
 };
@@ -99,6 +99,7 @@ export default {
   .product-card:hover .desktop-btn {
     display: block;
   }
+
   .product-card:hover .imageContainer::after {
     content: '';
     background: rgba(0, 0, 0, 0.5);

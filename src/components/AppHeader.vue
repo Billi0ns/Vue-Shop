@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-3 fixed-top">
+  <header class="mb-3 fixed-top">
     <b-navbar toggleable="md" type="light" class="customNav">
       <router-link to="/">
         <b-navbar-brand>
@@ -49,7 +49,7 @@
     <transition name="fade">
       <div class="cart-list__backdrop" v-if="showCartList"></div>
     </transition>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -88,6 +88,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/Transition.scss';
+
 .fa-shopping-cart {
   font-size: 23px;
   margin-top: 4px;
@@ -130,6 +132,16 @@ export default {
   z-index: 10;
 }
 
+.cart-list__backdrop {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
 @media (min-width: 768px) {
   .logo {
     max-width: 200px;
@@ -153,35 +165,5 @@ export default {
     flex-grow: 0;
     padding: 15px 0;
   }
-}
-
-.cart-list__backdrop {
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-// Transition
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 0.3s ease-out;
-}
-.slide-enter,
-.slide-leave-to {
-  opacity: 0;
-  transform: translateX(-250px);
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

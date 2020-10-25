@@ -11,14 +11,14 @@
           </div>
 
           <div class="col-xs-12 col-md-6 text-left mt-2 mt-md-0">
-            <h5 class="mt-1  mb-3 product-title">{{ product.title }}</h5>
+            <h5 class="mt-1 mb-3 product-title">{{ product.title }}</h5>
             <p class="font-weight-bold product-price">
               {{ product.price | formatNumber }}
             </p>
 
             <p class="cart-info">
-              ① 蛋糕皆為接單安排製作，故訂單確認後無法更換口味
-              ②到貨日前五天(不含例假日)，不接受更改到貨時間與地址
+              ① 蛋糕皆為接單安排製作，故訂單確認後無法更換口味 ②
+              到貨日前五天(不含例假日)，不接受更改到貨時間與地址
             </p>
 
             <label for="demo-sb" class="amount-text mb-0">
@@ -59,6 +59,7 @@
           </div>
         </div>
       </div>
+
       <div class="cart-modal__backdrop" @click="hideCartModal"></div>
     </div>
   </transition>
@@ -85,7 +86,6 @@ export default {
       this.amount = 1;
     },
     addToCartHandler() {
-      console.log(`購買${this.product.title} ${this.amount} 份`);
       this.$store.commit('addToCart', {
         amount: this.amount,
         id: this.product.id,
@@ -107,6 +107,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/Transition.scss';
+
 .cart-modal {
   position: fixed;
   z-index: 10;
@@ -115,7 +117,6 @@ export default {
   width: 100%;
   height: 100%;
   overflow: auto;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,7 +136,6 @@ export default {
   position: relative;
   z-index: 2;
   background-color: #fefefe;
-
   padding: 20px;
   border: 1px solid #888;
   border-radius: 7px;
@@ -205,16 +205,6 @@ export default {
 
 .mobile-bottom {
   display: none;
-}
-
-// Transition
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 
 @media (max-width: 992px) {

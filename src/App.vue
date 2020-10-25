@@ -3,10 +3,6 @@
     <app-header v-if="defaultRoute"></app-header>
     <div v-if="defaultRoute" class="fixed-top-padding"></div>
 
-    <!-- <keep-alive include="Home">
-      <router-view />
-    </keep-alive> -->
-
     <keep-alive include="Home">
       <router-view v-if="$route.meta.keepAlive" />
     </keep-alive>

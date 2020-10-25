@@ -111,6 +111,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/Transition.scss';
+
 .cart-list {
   position: fixed;
   z-index: 10;
@@ -220,15 +222,5 @@ export default {
   .cart-list__items {
     max-height: 500px;
   }
-}
-
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 0.3s ease-out;
-}
-.slide-enter,
-.slide-leave-to {
-  opacity: 0;
-  transform: translateX(-250px);
 }
 </style>

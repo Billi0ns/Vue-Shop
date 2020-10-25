@@ -1,52 +1,50 @@
 <template>
-  <div>
-    <div class="container my-md-4">
-      <div class="row">
-        <div class="col-lg-1"></div>
-        <div class="col-xs-12 col-md-6 col-lg-5 image-container">
-          <b-img :src="product.imageFile" class="product-image"></b-img>
-        </div>
-        <div class="col-xs-12 col-md-6  col-lg-5 text-left">
-          <h1 class="product-title">{{ product.title }}</h1>
-          <p class="product-price">{{ product.price | formatNumber }}</p>
-          <p class="product-info">
-            ① 蛋糕皆為接單安排製作，故訂單確認後無法更換口味
-            ②到貨日前五天(不含例假日)，不接受更改到貨時間與地址
+  <main class="container my-md-4">
+    <div class="row">
+      <div class="col-lg-1"></div>
+      <div class="col-xs-12 col-md-6 col-lg-5 image-container">
+        <b-img :src="product.imageFile" class="product-image"></b-img>
+      </div>
+      <div class="col-xs-12 col-md-6 col-lg-5 text-left">
+        <h1 class="product-title">{{ product.title }}</h1>
+        <p class="product-price">{{ product.price | formatNumber }}</p>
+        <p class="product-info">
+          ① 蛋糕皆為接單安排製作，故訂單確認後無法更換口味 ②
+          到貨日前五天(不含例假日)，不接受更改到貨時間與地址
+        </p>
+
+        <label for="product-sb" class="amount-text mb-0">
+          數量
+        </label>
+        <div class="d-flex">
+          <b-form-spinbutton
+            id="product-sb"
+            v-model="amount"
+            min="1"
+            max="30"
+            class="mb-4"
+          ></b-form-spinbutton>
+          <p class="product-subtotal">
+            小計：{{ (product.price * amount) | formatNumber }}
           </p>
+        </div>
 
-          <label for="product-sb" class="amount-text mb-0">
-            數量
-          </label>
-          <div class="d-flex">
-            <b-form-spinbutton
-              id="product-sb"
-              v-model="amount"
-              min="1"
-              max="30"
-              class="mb-4"
-            ></b-form-spinbutton>
-            <p class="product-subtotal">
-              小計：{{ (product.price * amount) | formatNumber }}
-            </p>
+        <button class="cart-btn" @click="addToCartHandler">
+          加入購物車
+        </button>
+        <div class="product-description">
+          <div class="product-description__header text-center">
+            <span>商品特色</span>
           </div>
-
-          <button class="cart-btn" @click="addToCartHandler">
-            加入購物車
-          </button>
-          <div class="product-description">
-            <div class="product-description__header text-center">
-              <span>商品特色</span>
-            </div>
-            <div class="product-description__content">
-              <p v-for="passage in passages" :key="passage" class="mb-2">
-                {{ passage }}
-              </p>
-            </div>
+          <div class="product-description__content">
+            <p v-for="passage in passages" :key="passage" class="mb-2">
+              {{ passage }}
+            </p>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -68,10 +66,8 @@ export default {
       return '尚無產品說明';
     },
   },
-
   methods: {
     addToCartHandler() {
-      console.log(`購買${this.product.title} ${this.amount} 份`);
       this.$store.commit('addToCart', {
         amount: this.amount,
         id: this.product.id,
@@ -100,7 +96,6 @@ export default {
         .get()
         .then((doc) => {
           if (doc.exists) {
-            console.log('Document data:', doc.data());
             this.product = {
               id: doc.id,
               ...doc.data(),
@@ -116,8 +111,7 @@ export default {
     },
   },
   watch: {
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
+    $route() {
       // Get the info again if route changed
       this.setProductInfo();
       this.amount = 1;
@@ -133,8 +127,8 @@ export default {
 <style lang="scss" scoped>
 .image-container {
   padding: 0;
-  margin-bottom: 20px;
   height: 0;
+  margin-bottom: 20px;
   padding-top: 100%;
   position: relative;
   background: #f6f7f8;
@@ -182,6 +176,7 @@ export default {
     background-color: white;
   }
 }
+
 .product-subtotal {
   line-height: 38px;
   text-align: right;
@@ -198,12 +193,10 @@ export default {
 .product-description__header span {
   font-size: 24px;
   letter-spacing: 12px;
-  overflow: hidden;
   color: #555;
   position: relative;
   display: inline-block;
-  margin-bottom: -8px;
-  margin-left: 6px;
+  margin-left: 12px;
 }
 
 .product-description__header span::after {
@@ -214,7 +207,7 @@ export default {
   width: 100%;
   height: 2px;
   background: rgb(253, 100, 78);
-  margin-left: -12px;
+  margin-left: -6px;
 }
 
 @media (min-width: 768px) {
