@@ -34,7 +34,6 @@ export default {
             console.log('Document data:', doc.data());
             this.$router.push(`/orderInfo/${this.orderId}`);
           } else {
-            console.log('No such document!');
             alert('查無此訂單！');
             this.orderId = '';
           }

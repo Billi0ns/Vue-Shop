@@ -231,8 +231,7 @@ export default {
     subtotal() {
       let sum = 0;
 
-      // eslint-disable-next-line array-callback-return
-      this.cartItems.map((item) => {
+      this.cartItems.forEach((item) => {
         sum += item.amount * item.price;
       });
       return sum;

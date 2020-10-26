@@ -148,16 +148,19 @@
       </div>
     </div>
   </div>
+  <app-loading v-else></app-loading>
 </template>
 
 <script>
 import AppProgressBar from '@/components/AppProgressBar.vue';
+import AppLoading from '@/components/AppLoading.vue';
 import { db } from '../firebase';
 
 export default {
   name: 'Payment',
   components: {
     AppProgressBar,
+    AppLoading,
   },
   data() {
     return {

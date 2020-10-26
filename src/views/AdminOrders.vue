@@ -42,11 +42,11 @@ export default {
     getItemsList(cartItems) {
       let result = '';
 
-      // eslint-disable-next-line array-callback-return
-      cartItems.map((item) => {
+      cartItems.forEach((item) => {
         result += `${item.title} x ${item.amount}\n`;
       });
 
+      result = result.slice(0, -1);
       return result;
     },
   },
