@@ -52,8 +52,12 @@ const routes = [
     ],
   },
   {
+    path: '/page-not-found',
+    component: () => import('../views/404.vue'),
+  },
+  {
     path: '*',
-    component: Home,
+    redirect: '/page-not-found',
   },
 ];
 
