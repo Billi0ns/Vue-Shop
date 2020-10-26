@@ -13,6 +13,7 @@
         </router-link>
       </div>
     </div>
+
     <div v-else>
       <div class="cart-items">
         <h1 class="cart-items-title">購物車（{{ cartItems.length }}件）</h1>
@@ -295,7 +296,6 @@ export default {
           isPayed: false,
         })
         .then((docRef) => {
-          console.log('Document written with ID: ', docRef.id);
           db.collection('orders')
             .doc(docRef.id)
             .update({
@@ -317,20 +317,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/styles/Order.scss';
+@import '@/styles/Transition.scss';
 
 .fa-shopping-cart {
   font-size: 100px;
   color: #cccccc;
   margin-bottom: 15px;
-}
-
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 0.3s ease-out;
-}
-.slide-enter,
-.slide-leave-to {
-  opacity: 0;
-  transform: translateX(-250px);
 }
 </style>

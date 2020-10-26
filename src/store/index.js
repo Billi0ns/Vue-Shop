@@ -28,9 +28,6 @@ export default new Vuex.Store({
       const localCart = localStorage.getItem('cartItems');
       if (localCart) {
         state.cartItems = JSON.parse(localCart);
-        console.log('cart yes');
-      } else {
-        console.log('cart no');
       }
     },
     addToCart(state, payload) {

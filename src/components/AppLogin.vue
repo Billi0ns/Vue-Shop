@@ -1,11 +1,11 @@
 <template>
   <b-modal id="login-modal" centered title="管理者登入" ref="login-modal">
-    <b-input-group class="mt-3">
+    <b-input-group>
       <b-form-input placeholder="Email Address" v-model="email"></b-form-input>
     </b-input-group>
     <b-input-group class="mt-3">
       <b-form-input
-        placeholder="password"
+        placeholder="Password"
         type="password"
         v-model="password"
         @keyup.enter="login"

@@ -14,7 +14,6 @@ const routes = [
       keepAlive: true,
     },
   },
-
   {
     path: '/products/:id',
     component: () => import('../views/ProductInfo.vue'),

@@ -1,5 +1,5 @@
 <template>
-  <b-form>
+  <b-form @submit="submitForm">
     <div class="row">
       <div class="col-lg-5">
         <b-form-group label="上傳圖片" label-for="inputImage">
@@ -37,8 +37,7 @@
 
           <b-col>
             <b-form-group label="單位" label-for="inputUnit">
-              <b-form-input id="inputUnit" v-model="form.unit" required>
-              </b-form-input>
+              <b-form-input id="inputUnit" v-model="form.unit"> </b-form-input>
             </b-form-group>
           </b-col>
         </b-form-row>
@@ -71,12 +70,7 @@
       </div>
     </div>
 
-    <b-button
-      type="submit"
-      variant="dark"
-      class="btn-block"
-      @click.prevent="submitForm"
-    >
+    <b-button type="submit" variant="dark" class="btn-block">
       確認
     </b-button>
   </b-form>
@@ -107,7 +101,6 @@ export default {
   methods: {
     addProduct() {
       db.collection('products')
-        // .add(this.form)
         .add({
           createdAt: new Date(Date.now()),
           ...this.form,
@@ -177,7 +170,9 @@ export default {
           console.log(error);
         });
     },
-    submitForm() {
+    submitForm(evt) {
+      evt.preventDefault();
+
       if (this.submitMode === 'addData') {
         this.addProduct();
         this.$bvModal.hide('add-modal');
@@ -208,6 +203,7 @@ export default {
 .img-thumbnail {
   max-height: 300px;
 }
+
 .delete-img {
   position: absolute;
   top: 8px;

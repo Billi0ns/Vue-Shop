@@ -64,6 +64,7 @@ export default {
     return {
       focusStatus: false,
       timeoutID: null,
+      timeoutEnded: false,
     };
   },
   computed: {
@@ -94,7 +95,11 @@ export default {
     handleUrl(item) {
       this.hideCartList();
       this.$store.commit('setCurrentProduct', item);
-      this.$router.push({ path: `/products/${item.id}` });
+      this.$router.push({ path: `/products/${item.id}` }).catch((error) => {
+        if (error.name !== 'NavigationDuplicated') {
+          throw error;
+        }
+      });
     },
   },
   created() {
@@ -102,7 +107,15 @@ export default {
       if (!this.focusStatus) {
         this.$store.commit('toggleCartListSlider', false);
       }
+      this.timeoutEnded = true;
     }, 3000);
+  },
+  watch: {
+    focusStatus() {
+      if (this.timeoutEnded) {
+        this.$store.commit('toggleCartListSlider', false);
+      }
+    },
   },
   beforeDestroy() {
     window.clearTimeout(this.timeoutID);
@@ -125,11 +138,10 @@ export default {
 
 .cart-list__content {
   position: relative;
-  z-index: 2;
   z-index: 11;
   background-color: #fefefe;
-  width: 300px;
-  max-width: 80%;
+  width: 80%;
+  max-width: 300px;
   height: 100%;
   padding: 0 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -149,11 +161,10 @@ export default {
   width: 70px;
   height: 70px;
   margin-right: 10px;
-
   background-position: center center;
   background-repeat: no-repeat;
-  overflow: hidden;
   background-size: contain;
+  overflow: hidden;
   cursor: pointer;
 }
 
