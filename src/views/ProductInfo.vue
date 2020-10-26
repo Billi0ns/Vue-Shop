@@ -131,7 +131,7 @@ export default {
   margin-bottom: 20px;
   padding-top: 100%;
   position: relative;
-  background: #f6f7f8;
+  background: $white-light;
 }
 
 .product-image {
@@ -144,13 +144,13 @@ export default {
 
 .product-title {
   font-size: 28px;
-  color: #333;
+  color: $blackish-grey;
 }
 
 .product-price {
   font-size: 20px;
   font-weight: bold;
-  color: #333;
+  color: $blackish-grey;
 }
 
 .product-info,
@@ -166,13 +166,13 @@ export default {
   border: none;
   border-radius: 3px;
   color: white;
-  background-color: rgb(253, 100, 78);
-  border: 1px solid rgb(253, 100, 78);
+  background-color: $tomato-red;
+  border: 1px solid $tomato-red;
   font-size: 15px;
   margin-bottom: 25px;
 
   &:hover {
-    color: rgb(253, 100, 78);
+    color: $tomato-red;
     background-color: white;
   }
 }
@@ -206,7 +206,7 @@ export default {
   left: 0;
   width: 100%;
   height: 2px;
-  background: rgb(253, 100, 78);
+  background: $tomato-red;
   margin-left: -6px;
 }
 

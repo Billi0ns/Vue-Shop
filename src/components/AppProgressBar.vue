@@ -55,7 +55,7 @@ export default {
   width: 92%;
   height: 2px;
   margin: 0 auto;
-  background: #cccccc;
+  background: $light-grey;
 }
 
 .myBadge {
@@ -81,11 +81,11 @@ export default {
 }
 
 .badge--finished {
-  background: rgb(158, 170, 178);
+  background: #9eaab2;
 }
 
 .badge--unfinished {
-  background: #cccccc;
+  background: $light-grey;
 }
 
 .middle-badge {

@@ -107,7 +107,7 @@ export default {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #ff6347;
+  background: $tomato-red;
 }
 
 .navbarToggle {

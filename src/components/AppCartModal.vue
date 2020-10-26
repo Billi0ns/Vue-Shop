@@ -156,12 +156,12 @@ export default {
   border: none;
   border-radius: 3px;
   color: white;
-  background-color: rgb(253, 100, 78);
-  border: 1px solid rgb(253, 100, 78);
+  background-color: $tomato-red;
+  border: 1px solid $tomato-red;
   font-size: 15px;
 
   &:hover {
-    color: rgb(253, 100, 78);
+    color: $tomato-red;
     background-color: white;
   }
 }
@@ -172,7 +172,7 @@ export default {
   // To avoid content jumping when loading images
   height: 0;
   padding-top: 100%;
-  background: #f6f7f8;
+  background: $white-light;
 }
 
 .product-image {

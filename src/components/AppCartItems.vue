@@ -320,7 +320,7 @@ export default {
 
 .fa-shopping-cart {
   font-size: 100px;
-  color: #cccccc;
+  color: $light-grey;
   margin-bottom: 15px;
 }
 </style>

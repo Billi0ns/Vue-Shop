@@ -39,16 +39,16 @@ export default {};
 .notfound-btn {
   padding: 10px 40px;
   font-weight: 700;
-  background-color: #fd644e;
+  background-color: $tomato-red;
   color: white;
   border-radius: 30px;
   border: 1px solid transparent;
   transition: all 0.2s ease-out;
 
   &:hover {
-    color: #fd644e;
+    color: $tomato-red;
     background-color: white;
-    border: 1px solid #fd644e;
+    border: 1px solid $tomato-red;
   }
 }
 

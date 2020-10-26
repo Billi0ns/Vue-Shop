@@ -48,7 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  background: #f6f7f8 url('../assets/background__small.jpg');
+  background: $white-light url('../assets/background__small.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   padding: 100px 50px;
@@ -65,7 +65,7 @@ export default {
 @media (min-width: 768px) {
   .container {
     padding: 200px 100px;
-    background: #f6f7f8 url('../assets/background.jpg');
+    background: $white-light url('../assets/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
   }

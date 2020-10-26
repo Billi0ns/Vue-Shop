@@ -39,7 +39,7 @@ export default {};
   position: absolute;
   width: 6px;
   height: 6px;
-  background: #333;
+  background: $blackish-grey;
   border-radius: 50%;
   animation: lds-default 1.2s linear infinite;
 }

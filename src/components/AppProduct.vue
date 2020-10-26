@@ -87,7 +87,7 @@ export default {
 
   &:hover {
     color: white;
-    background-color: rgb(253, 100, 78);
+    background-color: $tomato-red;
   }
 }
 

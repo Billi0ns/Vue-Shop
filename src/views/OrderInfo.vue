@@ -255,7 +255,7 @@ export default {
 
 .form-control {
   background: white;
-  border: 1px solid #ededed;
+  border: 1px solid $white-dark;
   padding-right: 20px;
 }
 
@@ -264,8 +264,8 @@ export default {
 }
 
 .input-group-text {
-  background: #f6f6f6;
-  border: 1px solid #ededed;
+  background: $white-light;
+  border: 1px solid $white-dark;
   font-weight: bold;
 }
 

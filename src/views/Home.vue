@@ -164,7 +164,7 @@ export default {
 
   background-color: white;
   min-width: 160px;
-  border: 1px solid #ededed;
+  border: 1px solid $white-dark;
   z-index: 1;
   padding-inline-start: 0;
   text-align: left;
@@ -180,7 +180,7 @@ export default {
 
   &:hover {
     color: white;
-    background-color: rgb(253, 100, 78);
+    background-color: $tomato-red;
   }
 }
 </style>

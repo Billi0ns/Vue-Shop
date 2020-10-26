@@ -1,12 +1,14 @@
 .cart-items,
 .order {
-  border: 1px solid #ededed;
+  border: 1px solid $white-dark;
   margin-bottom: 10px;
 }
 .cart-items-title,
 .order-title {
   font-size: 18px;
-  background: #f6f6f6;
+  background: $white-light;
+  background: $white-dark;
+
   margin-bottom: 0;
   padding: 10px;
   text-align: left;
@@ -18,7 +20,7 @@
 }
 
 .item-container:not(:last-child) {
-  border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid $white-dark;
 }
 
 .item-info {
@@ -35,7 +37,7 @@
 }
 
 .item-info__title {
-  color: #333;
+  color: $blackish-grey;
   font-size: 14px;
   cursor: pointer;
 }
@@ -51,7 +53,7 @@
   content: '\f00d';
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
-  color: #7f7f7f;
+  color: $grey;
   margin-right: auto;
 }
 
@@ -113,15 +115,15 @@
   }
 
   .table th {
-    border-top: 1px solid #ededed;
-    border-bottom: 1px solid #ededed;
+    border-top: 1px solid $white-dark;
+    border-bottom: 1px solid $white-dark;
     font-size: 14px;
     font-weight: 500;
   }
 
   .table td {
     vertical-align: middle;
-    border-top: 1px solid #ededed;
+    border-top: 1px solid $white-dark;
   }
 
   .item-info__img {

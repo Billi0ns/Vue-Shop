@@ -153,7 +153,7 @@ export default {
 }
 
 .item-container {
-  border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid $white-dark;
   padding: 10px 0;
 }
 
@@ -169,7 +169,7 @@ export default {
 }
 
 .item-info__title {
-  color: #333;
+  color: $blackish-grey;
   font-size: 14px;
   font-weight: 700;
   text-align: left;
@@ -199,7 +199,7 @@ export default {
   font-family: 'Font Awesome 5 Free';
   font-size: 13px;
   font-weight: 900;
-  color: #7f7f7f;
+  color: $grey;
   margin-right: auto;
 }
 
@@ -210,12 +210,12 @@ export default {
   border: none;
   border-radius: 3px;
   color: white;
-  background-color: rgb(253, 100, 78);
-  border: 1px solid rgb(253, 100, 78);
+  background-color: $tomato-red;
+  border: 1px solid $tomato-red;
   font-size: 15px;
 
   &:hover {
-    color: rgb(253, 100, 78);
+    color: $tomato-red;
     background-color: white;
   }
 }
