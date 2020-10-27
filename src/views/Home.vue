@@ -51,7 +51,7 @@
       <div class="row">
         <app-product
           v-for="product in products"
-          :key="product.key"
+          :key="product.id"
           :product="product"
           class="col-6 col-md-4 col-lg-3"
         ></app-product>
