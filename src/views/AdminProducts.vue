@@ -23,6 +23,7 @@
         <tr>
           <th scope="col">分類</th>
           <th scope="col">產品名稱</th>
+          <th scope="col">順序</th>
           <th scope="col">售價</th>
           <th scope="col">狀態</th>
           <th scope="col">建立日期</th>
@@ -33,6 +34,7 @@
         <tr v-for="product in products" :key="product.id">
           <td>{{ product.category }}</td>
           <td>{{ product.title }}</td>
+          <td>{{ product.orderNum }}</td>
           <td>{{ product.price | formatNumber }}</td>
           <td v-if="product.isEnabled" :style="{ color: '#28a745' }">已啟用</td>
           <td v-else :style="{ color: '#6c757d' }">未啟用</td>
@@ -143,6 +145,7 @@ export default {
   created() {
     db.collection('products')
       .orderBy('category')
+      .orderBy('orderNum')
       .onSnapshot((snapshot) => {
         this.products = snapshot.docs.map((doc) => ({
           id: doc.id,

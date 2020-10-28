@@ -153,10 +153,6 @@ export default {
   color: $blackish-grey;
 }
 
-.product-description__content {
-  min-height: 120px;
-}
-
 .product-info,
 .amount-text {
   font-size: 13px;
@@ -217,6 +213,10 @@ export default {
 @media (min-width: 768px) {
   .image-container {
     padding: 0 15px;
+  }
+
+  .product-description__content {
+    min-height: 110px;
   }
 }
 </style>

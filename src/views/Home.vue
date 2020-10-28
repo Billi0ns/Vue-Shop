@@ -43,7 +43,7 @@
             <li @click="setAllProducts">所有商品</li>
             <li @click="getCategory('切片蛋糕')">切片蛋糕</li>
             <li @click="getCategory('生日蛋糕')">生日蛋糕</li>
-            <li @click="getCategory('精緻甜點')">精緻甜點</li>
+            <li @click="getCategory('馬卡龍')">馬卡龍</li>
           </ul>
         </div>
       </div>
@@ -90,7 +90,8 @@ export default {
       const docRef = db
         .collection('products')
         .where('isEnabled', '==', true)
-        .orderBy('category');
+        .orderBy('category')
+        .orderBy('orderNum');
 
       docRef.onSnapshot((snapshot) => {
         this.allProducts = snapshot.docs.map((doc) => ({

@@ -42,10 +42,21 @@
           </b-col>
         </b-form-row>
 
-        <b-form-group label="售價" label-for="inputPrice">
-          <b-form-input id="inputPrice" v-model="form.price" required>
-          </b-form-input>
-        </b-form-group>
+        <b-form-row>
+          <b-col>
+            <b-form-group label="售價" label-for="inputPrice">
+              <b-form-input id="inputPrice" v-model="form.price" required>
+              </b-form-input>
+            </b-form-group>
+          </b-col>
+
+          <b-col>
+            <b-form-group label="上架順序" label-for="inputOrderNum">
+              <b-form-input id="inputOrderNum" v-model="form.orderNum" required>
+              </b-form-input>
+            </b-form-group>
+          </b-col>
+        </b-form-row>
 
         <hr />
 
@@ -91,6 +102,7 @@ export default {
         description: null,
         imageFile: null,
         isEnabled: false,
+        orderNum: 0,
       },
     };
   },
