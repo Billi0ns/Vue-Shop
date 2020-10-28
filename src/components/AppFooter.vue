@@ -3,12 +3,18 @@
     <hr />
 
     <div class="d-flex justify-content-center pt-3">
-      <i class="fab fa-facebook-square"></i>
-      <i class="fab fa-instagram-square"></i>
-      <i class="fab fa-line"></i>
+      <a href="https://github.com/Billi0ns">
+        <i class="fab fa-github-square"></i>
+      </a>
+      <a href="#">
+        <i class="fab fa-instagram-square"></i>
+      </a>
+      <a href="#">
+        <i class="fab fa-line"></i>
+      </a>
     </div>
 
-    <p class="footer-text ">產品圖片來自<a href="#">1% bakery</a></p>
+    <p class="footer-text ">資料、圖片皆源自網路</p>
 
     <p class="footer-text pb-3">網站僅做個人練習，不具商業用途</p>
   </footer>
@@ -28,6 +34,7 @@ export default {};
   padding: 0 10px;
   margin-bottom: 20px;
   cursor: pointer;
+  color: $blackish-grey;
 }
 
 .footer-text {
