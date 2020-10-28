@@ -153,6 +153,10 @@ export default {
   color: $blackish-grey;
 }
 
+.product-description__content {
+  min-height: 120px;
+}
+
 .product-info,
 .amount-text {
   font-size: 13px;
