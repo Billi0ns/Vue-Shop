@@ -41,9 +41,9 @@
             @mouseleave="dropdownShow = false"
           >
             <li @click="setAllProducts">所有商品</li>
-            <li @click="getCategory('重乳酪')">重乳酪蛋糕</li>
-            <li @click="getCategory('輕乳酪')">輕乳酪蛋糕</li>
-            <li @click="getCategory('禮盒')">禮盒</li>
+            <li @click="getCategory('切片蛋糕')">切片蛋糕</li>
+            <li @click="getCategory('生日蛋糕')">生日蛋糕</li>
+            <li @click="getCategory('精緻甜點')">精緻甜點</li>
           </ul>
         </div>
       </div>

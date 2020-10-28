@@ -142,7 +142,7 @@ export default {
   },
   created() {
     db.collection('products')
-      .orderBy('createdAt', 'desc')
+      .orderBy('category')
       .onSnapshot((snapshot) => {
         this.products = snapshot.docs.map((doc) => ({
           id: doc.id,
