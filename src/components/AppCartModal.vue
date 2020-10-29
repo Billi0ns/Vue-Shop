@@ -11,13 +11,13 @@
           </div>
 
           <div class="col-xs-12 col-md-6 text-left mt-2 mt-md-0">
-            <h5 class="mt-1 mb-3 product-title">{{ product.title }}</h5>
+            <h5 class="mt-1 product-title">{{ product.title }}</h5>
             <p class="font-weight-bold product-price">
               {{ product.price | formatNumber }}
             </p>
 
             <p class="cart-info">
-              ① 蛋糕皆為接單安排製作，故訂單確認後無法更換口味 ②
+              ① 甜點皆為接單安排製作，故訂單確認後無法更換口味 ②
               到貨日前五天(不含例假日)，不接受更改到貨時間與地址
             </p>
 
@@ -48,7 +48,7 @@
                 class="mb-3"
               ></b-form-spinbutton>
 
-              <p class="text-right font-weight-bold mb-2">
+              <p class="text-right font-weight-bold mb-3">
                 小計：{{ (product.price * amount) | formatNumber }}
               </p>
             </div>

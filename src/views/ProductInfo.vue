@@ -9,7 +9,7 @@
         <h1 class="product-title">{{ product.title }}</h1>
         <p class="product-price">{{ product.price | formatNumber }}</p>
         <p class="product-info">
-          ① 蛋糕皆為接單安排製作，故訂單確認後無法更換口味 ②
+          ① 甜點皆為接單安排製作，故訂單確認後無法更換口味 ②
           到貨日前五天(不含例假日)，不接受更改到貨時間與地址
         </p>
 
