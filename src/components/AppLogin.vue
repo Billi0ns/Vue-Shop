@@ -41,14 +41,7 @@ export default {
           this.$router.push({ name: 'Admin' });
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-
-          if (errorCode === 'auth/wrong-password') {
-            alert('Wrong password.');
-          } else {
-            alert(errorMessage);
-          }
+          alert('該用戶不存在或密碼錯誤');
           console.log(error);
         });
     },
