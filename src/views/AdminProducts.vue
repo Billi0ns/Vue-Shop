@@ -140,7 +140,7 @@ export default {
           console.error('Error removing document: ', error);
           this.$bvModal.hide('delete-modal');
           if (error.code === 'permission-denied') {
-            alert('訪客帳號只能讀取，無法寫入資料庫！');
+            alert('訪客帳號只有讀取權限，無法寫入資料庫！');
           }
         });
     },

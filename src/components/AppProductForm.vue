@@ -206,7 +206,7 @@ export default {
         error.code === 'storage/unauthorized' ||
         error.code === 'permission-denied'
       ) {
-        alert('訪客帳號只能讀取，無法寫入資料庫！');
+        alert('訪客帳號只有讀取權限，無法寫入資料庫！');
       }
     },
   },

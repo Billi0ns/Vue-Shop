@@ -1,16 +1,18 @@
 <template>
   <b-modal id="login-modal" centered title="管理者登入" ref="login-modal">
-    <b-input-group>
+    <b-form-group
+      description="訪客帳號： visitor@test.com (P.S. 訪客只有讀取權限，無法寫入資料庫)"
+    >
       <b-form-input placeholder="Email Address" v-model="email"></b-form-input>
-    </b-input-group>
-    <b-input-group class="mt-3">
+    </b-form-group>
+    <b-form-group description="訪客密碼： visitorpw456">
       <b-form-input
         placeholder="Password"
         type="password"
         v-model="password"
         @keyup.enter="login"
       ></b-form-input>
-    </b-input-group>
+    </b-form-group>
 
     <template v-slot:modal-footer="{}">
       <b-button size="md" variant="primary" @click="login" class="btn-block">
