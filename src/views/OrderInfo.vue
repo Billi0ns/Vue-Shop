@@ -122,6 +122,10 @@
               <div>{{ orderInfo.form.address }}</div>
             </div>
             <div class="d-flex  justify-content-between mb-2">
+              <div>訂單日期:</div>
+              <div>{{ getReadableDate(orderInfo.createdAt) }}</div>
+            </div>
+            <div class="d-flex  justify-content-between mb-2">
               <div>訂單金額:</div>
               <div>{{ orderInfo.total | formatNumber }}</div>
             </div>
@@ -229,6 +233,9 @@ export default {
       document.execCommand('copy');
       document.activeElement.blur();
       this.$_makeToast('已複製到剪貼板！');
+    },
+    getReadableDate(timestamp) {
+      return new Date(timestamp.seconds * 1000).toLocaleDateString('zh-tw');
     },
   },
   created() {

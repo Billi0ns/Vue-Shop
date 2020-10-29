@@ -18,48 +18,50 @@
       ></app-product-form>
     </b-modal>
 
-    <table class="table">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">分類</th>
-          <th scope="col">產品名稱</th>
-          <th scope="col">順序</th>
-          <th scope="col">售價</th>
-          <th scope="col">狀態</th>
-          <th scope="col">建立日期</th>
-          <th scope="col">編輯</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="product in products" :key="product.id">
-          <td>{{ product.category }}</td>
-          <td>{{ product.title }}</td>
-          <td>{{ product.orderNum }}</td>
-          <td>{{ product.price | formatNumber }}</td>
-          <td v-if="product.isEnabled" :style="{ color: '#28a745' }">已啟用</td>
-          <td v-else :style="{ color: '#6c757d' }">未啟用</td>
-          <td>{{ getReadableDate(product.createdAt) }}</td>
-          <td>
-            <b-button
-              variant="primary"
-              class="mr-3"
-              v-b-modal="'edit-modal'"
-              @click="activeProduct = product"
-            >
-              編輯
-            </b-button>
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">分類</th>
+            <th scope="col">產品名稱</th>
+            <th scope="col">順序</th>
+            <th scope="col">售價</th>
+            <th scope="col">狀態</th>
+            <th scope="col">編輯</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="product in products" :key="product.id">
+            <td>{{ product.category }}</td>
+            <td>{{ product.title }}</td>
+            <td>{{ product.orderNum }}</td>
+            <td>{{ product.price | formatNumber }}</td>
+            <td v-if="product.isEnabled" :style="{ color: '#28a745' }">
+              已啟用
+            </td>
+            <td v-else :style="{ color: '#6c757d' }">未啟用</td>
+            <td class="d-flex justify-content-center">
+              <b-button
+                variant="primary"
+                class="mr-3"
+                v-b-modal="'edit-modal'"
+                @click="activeProduct = product"
+              >
+                編輯
+              </b-button>
 
-            <b-button
-              variant="danger"
-              v-b-modal="'delete-modal'"
-              @click="activeProduct = product"
-            >
-              刪除
-            </b-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <b-button
+                variant="danger"
+                v-b-modal="'delete-modal'"
+                @click="activeProduct = product"
+              >
+                刪除
+              </b-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <b-modal
       id="edit-modal"
@@ -107,9 +109,6 @@ export default {
     AppProductForm,
   },
   methods: {
-    getReadableDate(timestamp) {
-      return new Date(timestamp.seconds * 1000).toLocaleDateString('zh-tw');
-    },
     deleteImage(imageUrl) {
       const imageRef = fb.storage().refFromURL(imageUrl);
 
