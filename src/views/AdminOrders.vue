@@ -60,7 +60,6 @@ export default {
           id: doc.id,
           ...doc.data(),
         }));
-        console.log("All data in 'orders' collection", this.orders);
       });
   },
 };

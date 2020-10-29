@@ -1,6 +1,10 @@
 <template>
   <b-navbar toggleable="md" type="dark" variant="info">
-    <b-navbar-brand href="#">Mary's Bakery</b-navbar-brand>
+    <b-navbar-brand href="#">
+      <router-link to="/" tag="span">
+        Mary's Bakery
+      </router-link>
+    </b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
