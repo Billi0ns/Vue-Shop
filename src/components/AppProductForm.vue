@@ -119,9 +119,11 @@ export default {
         })
         .then((docRef) => {
           console.log('Document written with ID: ', docRef.id);
+          this.$emit('makeToast');
         })
         .catch((error) => {
           console.error('Error adding document: ', error);
+          this.handleError(error);
         });
     },
     updateProduct(id) {
@@ -130,9 +132,11 @@ export default {
         .update(this.form)
         .then(() => {
           console.log('Document updated');
+          this.$emit('makeToast');
         })
         .catch((error) => {
           console.error('Error updating document: ', error);
+          this.handleError(error);
         });
     },
     uploadImage(e) {
@@ -150,6 +154,7 @@ export default {
           },
           (error) => {
             console.log(error);
+            this.handleError(error);
           },
           () => {
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
@@ -180,6 +185,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          this.handleError(error);
         });
     },
     submitForm(evt) {
@@ -188,13 +194,19 @@ export default {
       if (this.submitMode === 'addData') {
         this.addProduct();
         this.$bvModal.hide('add-modal');
-        this.$emit('makeToast');
       } else if (this.submitMode === 'editData') {
         this.updateProduct(this.activeProduct.id);
         this.$bvModal.hide('edit-modal');
-        this.$emit('makeToast');
       } else {
         console.log('error!');
+      }
+    },
+    handleError(error) {
+      if (
+        error.code === 'storage/unauthorized' ||
+        error.code === 'permission-denied'
+      ) {
+        alert('訪客帳號只能讀取，無法寫入資料庫！');
       }
     },
   },

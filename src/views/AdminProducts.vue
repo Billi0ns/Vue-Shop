@@ -138,6 +138,10 @@ export default {
         })
         .catch((error) => {
           console.error('Error removing document: ', error);
+          this.$bvModal.hide('delete-modal');
+          if (error.code === 'permission-denied') {
+            alert('訪客帳號只能讀取，無法寫入資料庫！');
+          }
         });
     },
   },
