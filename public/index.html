@@ -19,7 +19,62 @@
       >
     </noscript>
 
-    <div id="app"></div>
+    <div id="app">
+      <div class="loading-wrap">
+        <div class="lds-dual-ring"></div>
+      </div>
+    </div>
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        /* To prevent loading animation shift after vue rendered*/
+        overflow-y: scroll;
+        margin: 0;
+      }
+
+      .loading-wrap {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .lds-dual-ring {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+        background: white;
+      }
+
+      .lds-dual-ring:after {
+        content: ' ';
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid #fff;
+        border-color: black transparent black transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+      }
+
+      @keyframes lds-dual-ring {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
     <script
       src="https://kit.fontawesome.com/6c7dae04b2.js"
       crossorigin="anonymous"
