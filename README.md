@@ -55,12 +55,12 @@ P.S. 以下皆以 gif 示範，載入可能比較久
 
 研究後發現 BootstrapBue JavaScript 的部分支持 tree-shaking，因此就一個一個手動引入需要的組件，也成功讓檔案大小降到了 45.8KB。
 
-Firebase 的部分在了解後發現並不支持 tree0shaking。GitHub 上也有人開 issue 表示 bundle 太大了，而官方意識到這件事情也著手進行優化。
+Firebase 的部分在了解後發現並不支持 tree-shaking。GitHub 上也有人開 issue 表示 bundle 太大了，而官方意識到這件事情也著手進行優化。
 
-[最新消息](https://github.com/firebase/firebase-js-sdk/issues/2241)是優化後的 Firebase 已經在 alpha release 前的最終階段了，因此不久的將來應該就能使用瘦身後的 Firebase 了。
+[最新消息](https://github.com/firebase/firebase-js-sdk/issues/2241)是優化後的 Firebase 已經在 alpha release 前的最終階段了，因此不久後應該就能使用瘦身後的 Firebase 了。
 
 在優化後整體 bundle size 來到了 272.52KB，依然比建議的 244KB 來的高。不過主要是 Firebase 太大了，但目前又無法降低它的大小。
-而偏肥的 bundle size 也導致 First Contentful Paint 比較久，尤其在行動裝置上通常大於 5 秒。
+而偏肥的 bundle size 也導致 First Contentful Paint 比較久，尤其在行動裝置上通常大於 5 秒，電腦裝置則約 1.2 秒。
 為了避免長時間白畫面造成使用體驗不佳，我也在 vue render 前加入了一段載入動畫，讓等待的體驗好一些。
 
 最終 bundle report
@@ -82,8 +82,8 @@ P.S. 訪客帳號只有進入後台讀取資料庫的權限，無法寫入資料
 - [BootstrapVue](https://bootstrap-vue.org/)
 - [ESLint](https://eslint.org/) - 使用 Airbnb Style Guide，全部都符合沒有任何 error。而用 console.log 除錯的地方在 production mode 時也用 babel-plugin 移除跟 console 有關的訊息了。
 - [Firebase](https://firebase.google.com/) - 資料庫
-  - [Firestore](https://firebase.google.com/docs/firestores) - 存放產品訊息及訂單資料
-  - [Firebase Auth](https://firebase.google.com/docs/firestores) - 當 Navigation Guard 管理進入後台的權限
+  - [Firestore](https://firebase.google.com/docs/firestore) - 對資料庫進行 CRUD 操作來管理產品資料及訂單資料，
+  - [Firebase Auth](https://firebase.google.com/docs/auth) - 當 Navigation Guard 管理進入後台的權限
   - [Firebase Storage](https://firebase.google.com/docs/storage) - 存放產品的圖片
 
 ## 本地測試 <a name = "getting_started"></a>
