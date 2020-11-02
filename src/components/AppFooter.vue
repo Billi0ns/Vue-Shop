@@ -16,7 +16,7 @@
 
     <p class="footer-text">
       Copyright © 2020 Billi0ns
-      <a href="https://github.com/Billi0ns">
+      <a href="https://github.com/Billi0ns/Vue-Shop">
         <i class="fab fa-github" id="fa-github"></i>
       </a>
     </p>
