@@ -16,14 +16,12 @@ https://billi0ns-vue-shop.netlify.app
 
 ## 專案說明 <a name = "about"></a>
 
-前端使用 Vue 跟 BootstrapVue 來開發，資料庫以及使用者驗證的部份使用 Firebase。
+前端使用 Vue 與 BootstrapVue 來開發，資料庫以及使用者驗證使用 Firebase。
 
 - 前台功能： 瀏覽商品以及篩選商品類別、加入購物車及結帳、查詢歷史訂單等
 - 後台功能： 管理上架商品內容以及商品擺放順序，查看訂單紀錄等
 
 ## 網站功能 <a name="usage"></a>
-
-P.S. 以下皆以 gif 示範，載入可能比較久
 
 ### 加入購物車
 
@@ -49,15 +47,15 @@ P.S. 以下皆以 gif 示範，載入可能比較久
 
 在完成了網站的大致功能後，就把網站丟到 PageSpeed 測試速度。
 
-而測試結果中第一個建議就是移除未使用 JavaScript，因此就使用 Webpack Bundle Analyzer 來檢視一下是哪一個套件最佔空間。
+而測試結果中第一個建議是移除未使用 JavaScript，因此使用 Webpack Bundle Analyzer 來檢視一下是哪一個套件最佔空間。
 
-檢視後就看到其中最大的就是 BootstrapVue，gzipped 後依然有 206KB。其次就是 Firebase，gzipped 後有 154.8KB。
+檢視後發現其中最大的是 BootstrapVue，gzipped 後依然有 206KB。其次為 Firebase，gzipped 後有 154.8KB。
 
-研究後發現 BootstrapBue JavaScript 的部分支持 tree-shaking，因此就一個一個手動引入需要的組件，也成功讓檔案大小降到了 45.8KB。
+研究後發現 BootstrapBue JavaScript 的部分支持 tree-shaking，因此就逐一手動引入需要的組件，也成功讓檔案大小降到了 45.8KB。
 
 Firebase 的部分在了解後發現並不支持 tree-shaking。GitHub 上也有人開 issue 表示 bundle 太大了，而官方意識到這件事情也著手進行優化。
 
-[最新消息](https://github.com/firebase/firebase-js-sdk/issues/2241)是優化後的 Firebase 已經在 alpha release 前的最終階段了，因此不久後應該就能使用瘦身後的 Firebase 了。
+[最新消息](https://github.com/firebase/firebase-js-sdk/issues/2241)是優化後的 Firebase 已經在 alpha release 前的最終階段了，因此未來有機會能使用瘦身後的 Firebase 了。
 
 在優化後整體 bundle size 來到了 272.52KB，依然比建議的 244KB 來的高。不過主要是 Firebase 太大了，但目前又無法降低它的大小。
 而偏肥的 bundle size 也導致 First Contentful Paint 比較久，尤其在行動裝置上通常大於 5 秒，電腦裝置則約 1.2 秒。
