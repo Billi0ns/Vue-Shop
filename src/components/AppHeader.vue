@@ -165,5 +165,9 @@ export default {
     flex-grow: 0;
     padding: 15px 0;
   }
+
+  .cart-list__backdrop {
+    background: transparent;
+  }
 }
 </style>

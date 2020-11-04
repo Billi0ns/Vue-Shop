@@ -221,10 +221,6 @@ export default {
 }
 
 @media (min-width: 768px) {
-  .cart-list__backdrop {
-    background-color: transparent;
-  }
-
   .cart-list__content {
     height: auto;
     margin-top: 86px;
